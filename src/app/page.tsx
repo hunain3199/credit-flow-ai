@@ -1,3 +1,11 @@
+import { redirect } from "next/navigation";
+
+export default function Home() {
+  redirect("/signup");
+}
+
+/* ========== PREVIOUS HOME PAGE (commented out) ========== */
+/*
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 font-sans dark:bg-black">
@@ -28,3 +36,4 @@ export default function Home() {
     </div>
   );
 }
+*/
