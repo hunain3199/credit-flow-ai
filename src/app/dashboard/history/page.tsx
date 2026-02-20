@@ -190,12 +190,12 @@ export default function AttackHistoryPage() {
       {/* Main content */}
       <div className="flex flex-1 flex-col">
         {/* Header */}
-        <header className="border-b border-gray-200 bg-white px-4 md:px-6 py-4">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-4">
+        <header className="border-b border-gray-200 bg-white px-3 py-3 sm:px-4 md:px-6 md:py-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex min-w-0 items-center gap-3 sm:gap-4">
               <button
                 type="button"
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-600 md:hidden"
+                className="inline-flex shrink-0 items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-600 md:hidden"
                 onClick={() => setSidebarOpen(true)}
               >
                 <span className="sr-only">Open sidebar</span>
@@ -213,27 +213,23 @@ export default function AttackHistoryPage() {
                   />
                 </svg>
               </button>
-              <div className="flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white font-semibold">
+              <div className="flex min-w-0 items-center gap-2">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-600 text-sm font-semibold text-white sm:h-10 sm:w-10">
                   {userName.charAt(0).toUpperCase()}
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {userName}
-                  </p>
-                </div>
+                <p className="truncate text-sm font-medium text-gray-900">
+                  {userName}
+                </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-bold text-gray-900">
-                  CREDIT FLOW AI
-                </h1>
-              </div>
+            <div className="flex flex-shrink-0 items-center justify-between gap-2 sm:justify-end">
+              <h1 className="truncate text-lg font-bold text-gray-900 sm:text-xl md:text-2xl">
+                CREDIT FLOW AI
+              </h1>
               <button
                 onClick={handleLogout}
-                className="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700"
+                className="rounded bg-green-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-green-700 sm:px-4 sm:py-2 sm:text-sm"
               >
                 Log Out
               </button>
@@ -242,15 +238,15 @@ export default function AttackHistoryPage() {
         </header>
 
         {/* Attack History content */}
-        <main className="flex-1 overflow-y-auto bg-gray-50 px-4 py-8 md:px-8">
+        <main className="flex-1 overflow-y-auto bg-gray-50 px-3 py-6 sm:px-4 md:px-6 lg:px-8 md:py-8">
           <div className="mx-auto max-w-7xl">
-            <h2 className="mb-6 text-2xl font-bold text-gray-900">
+            <h2 className="mb-4 text-xl font-bold text-gray-900 sm:mb-6 sm:text-2xl">
               Attack History
             </h2>
 
             {/* Search and Action Bar */}
-            <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="relative flex-1 max-w-md">
+            <div className="mb-4 flex flex-col gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between">
+              <div className="relative w-full min-w-0 flex-1 md:max-w-md">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
                     className="h-5 w-5 text-gray-400"
@@ -271,7 +267,7 @@ export default function AttackHistoryPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search Letters"
-                  className="block w-full rounded-lg border border-gray-300 bg-white py-2 pl-10 pr-10 text-sm text-gray-900 placeholder-gray-500 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="block w-full min-w-0 rounded-lg border border-gray-300 bg-white py-2 pl-10 pr-10 text-sm text-gray-900 placeholder-gray-500 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 {searchQuery && (
                   <button
@@ -296,10 +292,10 @@ export default function AttackHistoryPage() {
               </div>
               <Link
                 href="/dashboard/attack"
-                className="inline-flex items-center gap-2 rounded bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700"
+                className="inline-flex w-full items-center justify-center gap-2 rounded bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 sm:w-auto"
               >
                 <svg
-                  className="h-5 w-5"
+                  className="h-5 w-5 shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -317,101 +313,25 @@ export default function AttackHistoryPage() {
 
             {/* Table */}
             <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
+              <div className="overflow-x-auto -mx-3 sm:mx-0">
+                <table className="min-w-[800px] w-full divide-y divide-gray-200">
                   <thead className="bg-green-600">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">
                         <input
                           type="checkbox"
                           className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
                         />
                         <span className="ml-2">All</span>
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-                        #
-                      </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-                        <div className="flex items-center gap-1">
-                          Client(s)
-                          <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
-                            />
-                          </svg>
-                        </div>
-                      </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-                        <div className="flex items-center gap-1">
-                          Created Date
-                          <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
-                            />
-                          </svg>
-                        </div>
-                      </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-                        <div className="flex items-center gap-1">
-                          Date of Last Attack
-                          <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
-                            />
-                          </svg>
-                        </div>
-                      </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-                        Letter Files
-                      </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-                        PPAMS Status
-                      </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-                        Number of Files
-                      </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-                        <div className="flex items-center gap-1">
-                          Action(s)
-                          <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
-                            />
-                          </svg>
-                        </div>
-                      </th>
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">#</th>
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">Client(s)</th>
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">Created Date</th>
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">Date of Last Attack</th>
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">Letter Files</th>
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">PPAMS Status</th>
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">Number of Files</th>
+                      <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">Action(s)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
@@ -419,7 +339,7 @@ export default function AttackHistoryPage() {
                     <tr>
                       <td
                         colSpan={9}
-                        className="px-4 py-12 text-center text-sm text-gray-500"
+                        className="px-3 py-8 text-center text-sm text-gray-500 sm:px-4 sm:py-12"
                       >
                         No attack history records found.
                       </td>
