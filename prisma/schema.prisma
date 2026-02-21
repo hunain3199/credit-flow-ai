@@ -16,3 +16,12 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+// Customers who sign up for product updates (name, email, credit score)
+model ProductUpdateLead {
+  id          String    @id @default(cuid())
+  name        String
+  email       String
+  creditScore Int?      // 300-850, optional
+  createdAt   DateTime  @default(now())
+}
+

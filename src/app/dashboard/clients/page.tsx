@@ -301,10 +301,10 @@ export default function ManageClientsPage() {
               </div>
             </div>
 
-            {/* Table */}
-            <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-              <div className="overflow-x-auto -mx-3 sm:mx-0">
-                <table className="min-w-[640px] w-full divide-y divide-gray-200 text-sm">
+            {/* Table – desktop and larger */}
+            <div className="hidden overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm md:block">
+              <div className="overflow-x-auto">
+                <table className="w-full table-fixed divide-y divide-gray-200 text-sm">
                   <thead className="bg-emerald-600 text-xs font-semibold uppercase tracking-wide text-white">
                     <tr>
                       <th className="whitespace-nowrap px-2 py-2 text-left sm:px-4 sm:py-3">
@@ -329,8 +329,12 @@ export default function ManageClientsPage() {
                           className="h-4 w-4 rounded border-gray-300 text-emerald-500 focus:ring-emerald-500"
                         />
                       </td>
-                      <td className="whitespace-nowrap px-2 py-2 text-gray-900 sm:px-4 sm:py-3">Sample Client</td>
-                      <td className="whitespace-nowrap px-2 py-2 text-gray-800 sm:px-4 sm:py-3">{userName}</td>
+                      <td className="whitespace-nowrap px-2 py-2 text-gray-900 sm:px-4 sm:py-3">
+                        Sample Client
+                      </td>
+                      <td className="whitespace-nowrap px-2 py-2 text-gray-800 sm:px-4 sm:py-3">
+                        {userName}
+                      </td>
                       <td className="min-w-[140px] px-2 py-2 text-gray-700 sm:px-4 sm:py-3">
                         <span className="break-all">sampleclient@example.com</span>
                       </td>
@@ -364,6 +368,44 @@ export default function ManageClientsPage() {
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+
+            {/* Mobile card layout */}
+            <div className="mt-4 space-y-3 md:hidden">
+              <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <div className="font-semibold text-gray-900">Sample Client</div>
+                  <span className="text-xs text-gray-500">February-16-2026</span>
+                </div>
+                <p className="mb-2 text-xs text-gray-700">
+                  Added by <span className="font-medium">{userName}</span>
+                </p>
+                <p className="mb-3 break-all text-xs text-gray-700">
+                  sampleclient@example.com
+                </p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    className="rounded-full border border-gray-300 p-1 text-gray-600 hover:bg-gray-100"
+                    aria-label="Edit client"
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-full border border-gray-300 p-1 text-gray-600 hover:bg-gray-100"
+                    aria-label="View client"
+                  >
+                    👁️
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded bg-emerald-500 px-3 py-1 text-xs font-semibold text-white hover:bg-emerald-600"
+                  >
+                    Upload Report
+                  </button>
+                </div>
               </div>
             </div>
           </div>

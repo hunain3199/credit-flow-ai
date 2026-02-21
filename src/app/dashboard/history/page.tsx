@@ -311,10 +311,10 @@ export default function AttackHistoryPage() {
               </Link>
             </div>
 
-            {/* Table */}
-            <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-              <div className="overflow-x-auto -mx-3 sm:mx-0">
-                <table className="min-w-[800px] w-full divide-y divide-gray-200">
+            {/* Table – desktop and larger */}
+            <div className="hidden overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm md:block">
+              <div className="overflow-x-auto">
+                <table className="w-full table-fixed divide-y divide-gray-200">
                   <thead className="bg-green-600">
                     <tr>
                       <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-white sm:px-4 sm:py-3">
@@ -347,6 +347,11 @@ export default function AttackHistoryPage() {
                   </tbody>
                 </table>
               </div>
+            </div>
+
+            {/* Mobile layout */}
+            <div className="mt-4 rounded-lg border border-dashed border-gray-300 bg-white px-4 py-6 text-center text-sm text-gray-500 md:hidden">
+              No attack history records found.
             </div>
           </div>
         </main>
