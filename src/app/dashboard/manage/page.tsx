@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
+import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 
 interface User {
   id: string;
@@ -50,8 +52,8 @@ export default function ManageCroAccountPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-50">
-        <p className="text-sm text-gray-600">Loading...</p>
+      <div className="flex min-h-screen items-center justify-center bg-[#0a0a2a]">
+        <p className="text-sm text-blue-200">Loading...</p>
       </div>
     );
   }
@@ -61,187 +63,21 @@ export default function ManageCroAccountPage() {
   const userName = user.name || user.email.split("@")[0];
 
   return (
-    <div className="flex min-h-screen bg-white">
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-30 bg-black/40 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 transform border-r border-gray-200 bg-white p-4 shadow-lg transition-transform duration-200 ease-out md:static md:z-auto md:block md:translate-x-0 md:shadow-none ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        }`}
-      >
-        <div className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900">CREDIT FLOW AI</h2>
-        </div>
-
-        <nav className="space-y-2">
-          <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-gray-500">
-              Account
-            </p>
-            <Link
-              href="/dashboard/setup"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Setup Client Portal
-            </Link>
-            <Link
-              href="/dashboard/manage"
-              className="block rounded bg-green-50 px-3 py-2 text-sm font-medium text-green-700"
-            >
-              Manage My CRO Account
-            </Link>
-          </div>
-
-          <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-gray-500">
-              Main
-            </p>
-            <Link
-              href="/dashboard"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Home
-            </Link>
-            <Link
-              href="/dashboard/affiliate"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Credit Flow AI Affiliate
-            </Link>
-            <Link
-              href="/dashboard/purchase"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Purchase Attack Credits
-            </Link>
-            <Link
-              href="/dashboard/attack"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Attack Area
-            </Link>
-            <Link
-              href="/dashboard/history"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Attack History
-            </Link>
-            <Link
-              href="/dashboard/clients"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Manage My Clients
-            </Link>
-            <Link
-              href="/dashboard/client-account"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Manage My Own Client Account
-            </Link>
-            <Link
-              href="/dashboard/scoreboard"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Client Scoreboard
-            </Link>
-          </div>
-
-          <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-gray-500">
-              Support
-            </p>
-            <Link
-              href="/dashboard/support"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Get Credit Flow AI Support
-            </Link>
-            <Link
-              href="/dashboard/faq"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              FAQ
-            </Link>
-            <Link
-              href="/dashboard/training"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Training Videos
-            </Link>
-            <Link
-              href="/dashboard/credit-report"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Get Credit Report Here
-            </Link>
-            <Link
-              href="/dashboard/become-affiliate"
-              className="block rounded px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
-            >
-              Become an Affiliate
-            </Link>
-          </div>
-        </nav>
-      </aside>
+    <div className="dashboard-theme flex min-h-screen bg-[#0a0a2a]">
+      <DashboardSidebar
+        currentPath="/dashboard/manage"
+        sidebarOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       <div className="flex flex-1 flex-col">
-        <header className="border-b border-gray-200 bg-white px-4 md:px-6 py-4">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-4">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-600 md:hidden"
-                onClick={() => setSidebarOpen(true)}
-              >
-                <span className="sr-only">Open sidebar</span>
-                <svg
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M4 6H20M4 12H20M4 18H20"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-              <div className="flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white font-semibold">
-                  {userName.charAt(0).toUpperCase()}
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {userName}
-                  </p>
-                </div>
-              </div>
-            </div>
+        <DashboardHeader
+          userName={userName}
+          onOpenSidebar={() => setSidebarOpen(true)}
+          onLogout={handleLogout}
+        />
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-bold text-gray-900">
-                  CREDIT FLOW AI
-                </h1>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700"
-              >
-                Log Out
-              </button>
-            </div>
-          </div>
-        </header>
-
-        <main className="flex-1 overflow-y-auto bg-gray-50 py-6 px-4 md:px-8">
+        <main className="flex-1 overflow-y-auto bg-[#0a0a2a] px-4 py-6 md:px-8">
           <div className="mx-auto max-w-6xl rounded-xl border border-gray-200 bg-white p-4 shadow-sm md:p-6 lg:p-8">
             <div className="mb-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-4 md:flex-row md:items-center">
               <div>

@@ -24,3 +24,91 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.dashboard-theme {
+  background: #0a0a2a;
+  color: #ffffff;
+}
+
+.dashboard-theme .bg-white {
+  background: rgb(255 255 255 / 0.05) !important;
+}
+
+.dashboard-theme .bg-gray-50 {
+  background: #0a0a2a !important;
+}
+
+.dashboard-theme .border-gray-200,
+.dashboard-theme .border-gray-300 {
+  border-color: rgb(30 58 138 / 0.4) !important;
+}
+
+.dashboard-theme .text-gray-900 {
+  color: #ffffff !important;
+}
+
+.dashboard-theme .text-gray-800,
+.dashboard-theme .text-gray-700,
+.dashboard-theme .text-gray-600,
+.dashboard-theme .text-gray-500 {
+  color: #bfdbfe !important;
+}
+
+.dashboard-theme .text-gray-400 {
+  color: #93c5fd !important;
+}
+
+.dashboard-theme .hover\:bg-gray-100:hover {
+  background: rgb(255 255 255 / 0.1) !important;
+}
+
+.dashboard-theme .hover\:bg-gray-200:hover {
+  background: rgb(255 255 255 / 0.14) !important;
+}
+
+.dashboard-theme .bg-gray-100 {
+  background: rgb(255 255 255 / 0.08) !important;
+}
+
+.dashboard-theme .divide-gray-100 > :not([hidden]) ~ :not([hidden]),
+.dashboard-theme .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgb(30 58 138 / 0.35) !important;
+}
+
+.dashboard-theme table thead tr {
+  background: rgb(16 185 129 / 0.92) !important;
+}
+
+.dashboard-theme table tbody {
+  background: rgb(255 255 255 / 0.03) !important;
+}
+
+.dashboard-theme table th {
+  color: #ffffff !important;
+}
+
+.dashboard-theme button:not([class*="bg-"]) {
+  color: #bfdbfe;
+}
+
+.dashboard-theme a {
+  color: inherit;
+}
+
+.dashboard-theme input,
+.dashboard-theme select,
+.dashboard-theme textarea {
+  border-color: rgb(30 58 138 / 0.45) !important;
+  background: rgb(255 255 255 / 0.08) !important;
+  color: #ffffff !important;
+}
+
+.dashboard-theme input::placeholder,
+.dashboard-theme textarea::placeholder {
+  color: rgb(147 197 253 / 0.75) !important;
+}
+
+.dashboard-theme select option {
+  background: #ffffff;
+  color: #111827;
+}
