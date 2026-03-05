@@ -1,0 +1,19 @@
+# Credit Flow AI - Docker Compose for VPS
+# Usage: copy .env to server, then: docker compose up -d
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: credit-flow-ai:latest
+    container_name: credit-flow-ai
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    # Or set env vars explicitly (don't commit secrets):
+    # environment:
+    #   - DATABASE_URL=postgresql://user:pass@host:5432/dbname
+    #   - JWT_SECRET=your-secret

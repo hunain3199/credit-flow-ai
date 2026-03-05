@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build
+.next
+out
+dist
+build
+
+# Env (inject at runtime on VPS)
+.env
+.env.*
+!.env.example
+
+# Git / IDE
+.git
+.gitignore
+.dockerignore
+.cursor
+.vscode
+*.md
+!README.md
+
+# Debug / test
+npm-debug.log*
+.DS_Store
+*.log
+coverage
+.nyc_output
+__tests__
+*.test.*
+*.spec.*
+
+# Prisma (keep schema and migrations; ignore generated)
+# prisma/migrations is needed if you run migrate in image
