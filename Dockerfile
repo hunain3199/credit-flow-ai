@@ -6,7 +6,7 @@ FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 # --- Builder (Prisma + Next.js build) ---
 FROM node:20-alpine AS builder
@@ -15,6 +15,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Prisma generate (no DB needed at build time)
+ENV DATABASE_URL="postgresql://localhost:5432/dummy"
 RUN npx prisma generate
 
 # Build Next.js (standalone output)

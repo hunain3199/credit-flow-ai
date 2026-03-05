@@ -13,6 +13,9 @@ services:
       - "3000:3000"
     env_file:
       - .env
+    # Reach PostgreSQL on the same host (Linux): use host.docker.internal in DATABASE_URL
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     # Or set env vars explicitly (don't commit secrets):
     # environment:
     #   - DATABASE_URL=postgresql://user:pass@host:5432/dbname
