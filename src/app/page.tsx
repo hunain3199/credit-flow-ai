@@ -88,7 +88,7 @@ export default function Page() {
       {/* Coming Soon Page */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-16">
         <Link href="/" className="mb-12">
-          {/* <div className="relative h-20 w-auto md:h-24">
+          <div className="relative h-20 w-auto md:h-24">
             <Image
               src="/logo.png"
               alt="CreditFlow AI Logo"
@@ -97,7 +97,7 @@ export default function Page() {
               className="h-auto w-auto object-contain"
               priority
             />
-          </div> */}
+          </div>
         </Link>
         <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl text-center mb-4">
           Coming Soon
