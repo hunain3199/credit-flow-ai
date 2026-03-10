@@ -2,34 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "@/app/dashboard/_context/language-context";
 
 interface DashboardSidebarProps {
   currentPath: string;
   sidebarOpen: boolean;
   onClose: () => void;
 }
-
-const accountItems = [
-  { href: "/dashboard/setup", label: "Setup Client Portal" },
-  { href: "/dashboard/manage", label: "Manage My CRO Account" },
-];
-
-const mainItems = [
-  { href: "/dashboard", label: "Home" },
-  { href: "/dashboard/affiliate", label: "Credit Flow AI Affiliate" },
-  { href: "/dashboard/purchase", label: "Purchase Attack Credits" },
-  { href: "/dashboard/attack", label: "Attack Area" },
-  { href: "/dashboard/history", label: "Attack History" },
-  { href: "/dashboard/clients", label: "Manage My Clients" },
-  { href: "/dashboard/client-account", label: "Manage My Own Client Account" },
-  { href: "/dashboard/scoreboard", label: "Client Scoreboard" },
-];
-
-const supportItems = [
-  { href: "/dashboard/support", label: "Get Credit Flow AI Support" },
-  { href: "/dashboard/faq", label: "FAQ" },
-  { href: "/dashboard/training", label: "Training Videos" },
-];
 
 function itemClass(isActive: boolean) {
   return isActive
@@ -42,6 +21,30 @@ export default function DashboardSidebar({
   sidebarOpen,
   onClose,
 }: DashboardSidebarProps) {
+  const { t } = useLanguage();
+
+  const accountItems = [
+    { href: "/dashboard/setup", label: t.sidebar.setupClientPortal },
+    { href: "/dashboard/manage", label: t.sidebar.manageCroAccount },
+  ];
+
+  const mainItems = [
+    { href: "/dashboard", label: t.sidebar.home },
+    { href: "/dashboard/affiliate", label: t.sidebar.creditFlowAffiliate },
+    { href: "/dashboard/purchase", label: t.sidebar.purchaseAttackCredits },
+    { href: "/dashboard/attack", label: t.sidebar.attackArea },
+    { href: "/dashboard/history", label: t.sidebar.attackHistory },
+    { href: "/dashboard/clients", label: t.sidebar.manageClients },
+    { href: "/dashboard/client-account", label: t.sidebar.manageOwnClientAccount },
+    { href: "/dashboard/scoreboard", label: t.sidebar.clientScoreboard },
+  ];
+
+  const supportItems = [
+    { href: "/dashboard/support", label: t.sidebar.getSupport },
+    { href: "/dashboard/faq", label: t.sidebar.faq },
+    { href: "/dashboard/training", label: t.sidebar.trainingVideos },
+  ];
+
   return (
     <>
       {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/60 md:hidden" onClick={onClose} />}
@@ -64,7 +67,7 @@ export default function DashboardSidebar({
 
         <nav className="space-y-2">
           <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-blue-300">Account</p>
+            <p className="text-xs font-semibold uppercase text-blue-300">{t.sidebar.account}</p>
             {accountItems.map((item) => (
               <Link key={item.href} href={item.href} className={itemClass(currentPath === item.href)}>
                 {item.label}
@@ -73,7 +76,7 @@ export default function DashboardSidebar({
           </div>
 
           <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-blue-300">Main</p>
+            <p className="text-xs font-semibold uppercase text-blue-300">{t.sidebar.main}</p>
             {mainItems.map((item) => (
               <Link key={item.href} href={item.href} className={itemClass(currentPath === item.href)}>
                 {item.label}
@@ -82,7 +85,7 @@ export default function DashboardSidebar({
           </div>
 
           <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-blue-300">Support</p>
+            <p className="text-xs font-semibold uppercase text-blue-300">{t.sidebar.support}</p>
             {supportItems.map((item) => (
               <Link key={item.href} href={item.href} className={itemClass(currentPath === item.href)}>
                 {item.label}
@@ -94,10 +97,10 @@ export default function DashboardSidebar({
               rel="noopener noreferrer"
               className={itemClass(false)}
             >
-              Get Credit Report Here
+              {t.sidebar.getCreditReportHere}
             </a>
             <Link href="/dashboard/become-affiliate" className={itemClass(currentPath === "/dashboard/become-affiliate")}>
-              Become an Affiliate
+              {t.sidebar.becomeAffiliate}
             </Link>
           </div>
         </nav>

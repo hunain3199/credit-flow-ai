@@ -1,13 +1,20 @@
 "use client";
 
-import { ReactNode } from "react";
+import { useLanguage } from "@/app/dashboard/_context/language-context";
+import type { Locale } from "@/app/dashboard/_lib/translations";
 
 interface DashboardHeaderProps {
   userName: string;
   onOpenSidebar: () => void;
   onLogout: () => void;
-  leftExtras?: ReactNode;
+  leftExtras?: React.ReactNode;
 }
+
+const localeLabels: Record<Locale, string> = {
+  en: "EN",
+  es: "SP",
+  cr: "CR",
+};
 
 export default function DashboardHeader({
   userName,
@@ -15,6 +22,8 @@ export default function DashboardHeader({
   onLogout,
   leftExtras,
 }: DashboardHeaderProps) {
+  const { locale, setLocale, t } = useLanguage();
+
   return (
     <header className="border-b border-blue-900/30 bg-[#0a0a2a]/95 px-3 py-3 backdrop-blur-sm sm:px-4 md:px-6 md:py-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -45,6 +54,29 @@ export default function DashboardHeader({
             </div>
             <p className="truncate text-sm font-medium text-white">{userName}</p>
           </div>
+          <div className="flex gap-2">
+            {(["en", "es", "cr"] as const).map((loc) => (
+              <button
+                key={loc}
+                type="button"
+                onClick={() => setLocale(loc)}
+                className={`rounded px-2 py-1 text-xs font-medium sm:px-2.5 sm:py-1.5 ${
+                  locale === loc
+                    ? "bg-emerald-500/80 text-white"
+                    : "text-blue-200 hover:bg-white/10"
+                }`}
+                title={
+                  loc === "en"
+                    ? "English"
+                    : loc === "es"
+                      ? "Spanish"
+                      : "Creole"
+                }
+              >
+                {localeLabels[loc]}
+              </button>
+            ))}
+          </div>
           {leftExtras}
         </div>
 
@@ -53,7 +85,7 @@ export default function DashboardHeader({
             onClick={onLogout}
             className="rounded bg-emerald-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-600 sm:px-4 sm:py-2 sm:text-sm"
           >
-            Log Out
+            {t.header.logOut}
           </button>
         </div>
       </div>

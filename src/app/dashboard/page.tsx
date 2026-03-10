@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
+import { useLanguage } from "@/app/dashboard/_context/language-context";
 
 interface User {
   id: string;
@@ -14,6 +14,7 @@ interface User {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -49,7 +50,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0a0a2a]">
-        <div className="text-lg text-blue-200">Loading...</div>
+        <div className="text-lg text-blue-200">{t.dashboard.loading}</div>
       </div>
     );
   }
@@ -73,22 +74,12 @@ export default function DashboardPage() {
           userName={userName}
           onOpenSidebar={() => setSidebarOpen(true)}
           onLogout={handleLogout}
-          leftExtras={
-            <div className="flex gap-2">
-              <button className="rounded px-2 py-1 text-xs font-medium text-blue-200 hover:bg-white/10">
-                EN
-              </button>
-              <button className="rounded px-2 py-1 text-xs font-medium text-blue-200 hover:bg-white/10">
-                SP
-              </button>
-            </div>
-          }
         />
 
         {/* Dashboard Content */}
         <main className="flex-1 overflow-y-auto bg-[#0a0a2a] p-6">
           <h2 className="mb-6 text-2xl font-bold text-gray-900">
-            Welcome, {userName}!
+            {t.dashboard.welcome.replace("{name}", userName)}
           </h2>
 
           {/* Feature Cards */}
@@ -100,12 +91,12 @@ export default function DashboardPage() {
                     <span className="text-white text-xl">👤</span>
                   </div>
                   <p className="text-xs font-semibold text-gray-600">
-                    CLIENT SIGN UP
+                    {t.dashboard.clientSignUp}
                   </p>
                 </div>
               </div>
               <button className="w-full rounded bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
-                CREDIT FLOW AI CLIENT SIGN UP
+                {t.dashboard.creditFlowClientSignUp}
               </button>
             </div>
 
@@ -116,12 +107,12 @@ export default function DashboardPage() {
                     <span className="text-white text-xl">📊</span>
                   </div>
                   <p className="text-xs font-semibold text-gray-600">
-                    FREE SCORE NOW
+                    {t.dashboard.freeScoreNow}
                   </p>
                 </div>
               </div>
               <button className="w-full rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
-                MY FREE SCORE NOW
+                {t.dashboard.myFreeScoreNow}
               </button>
             </div>
 
@@ -132,12 +123,12 @@ export default function DashboardPage() {
                     <span className="text-white text-xl">⚔️</span>
                   </div>
                   <p className="text-xs font-semibold text-gray-600">
-                    ATTACK AREA
+                    {t.dashboard.attackArea}
                   </p>
                 </div>
               </div>
               <button className="w-full rounded bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700">
-                Attack Area
+                {t.dashboard.attackArea}
               </button>
             </div>
 
@@ -148,12 +139,12 @@ export default function DashboardPage() {
                     <span className="text-white text-xl">💰</span>
                   </div>
                   <p className="text-xs font-semibold text-gray-600">
-                    BUY CREDITS
+                    {t.dashboard.buyCredits}
                   </p>
                 </div>
               </div>
               <button className="w-full rounded bg-yellow-600 px-4 py-2 text-sm font-medium text-white hover:bg-yellow-700">
-                BUY ATTACK CREDITS HERE
+                {t.dashboard.buyAttackCreditsHere}
               </button>
             </div>
 
@@ -164,12 +155,12 @@ export default function DashboardPage() {
                     <span className="text-white text-xl">📄</span>
                   </div>
                   <p className="text-xs font-semibold text-gray-600">
-                    CREDIT REPORT
+                    {t.dashboard.creditReport}
                   </p>
                 </div>
               </div>
               <button className="w-full rounded bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700">
-                Get Credit Report Here
+                {t.dashboard.getCreditReportHere}
               </button>
             </div>
           </div>
@@ -178,30 +169,30 @@ export default function DashboardPage() {
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-4">
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="mb-2 text-sm font-medium text-gray-600">
-                Total Clients
+                {t.dashboard.totalClients}
               </h3>
               <p className="text-3xl font-bold text-gray-900">0</p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="mb-2 text-sm font-medium text-gray-600">
-                Complementary Credits
+                {t.dashboard.complementaryCredits}
               </h3>
               <p className="text-3xl font-bold text-gray-900">0</p>
-              <p className="mt-1 text-xs text-gray-500">Expiry Date: N/A</p>
+              <p className="mt-1 text-xs text-gray-500">{t.dashboard.expiryDate}: {t.dashboard.na}</p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="mb-2 text-sm font-medium text-gray-600">
-                Available Credits
+                {t.dashboard.availableCredits}
               </h3>
               <p className="text-3xl font-bold text-gray-900">0</p>
-              <p className="mt-1 text-xs text-gray-500">Expiry Date: N/A</p>
+              <p className="mt-1 text-xs text-gray-500">{t.dashboard.expiryDate}: {t.dashboard.na}</p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="mb-2 text-sm font-medium text-gray-600">
-                Used Credits
+                {t.dashboard.usedCredits}
               </h3>
               <p className="text-3xl font-bold text-gray-900">0</p>
-              <p className="mt-1 text-xs text-gray-500">Expiry Date: N/A</p>
+              <p className="mt-1 text-xs text-gray-500">{t.dashboard.expiryDate}: {t.dashboard.na}</p>
             </div>
           </div>
 
@@ -213,9 +204,9 @@ export default function DashboardPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">
-                  ATTEND METRO 2 MONDAY
+                  {t.dashboard.attendMetro2Monday}
                 </h3>
-                <p className="text-sm text-gray-600">Meeting Code: 222888</p>
+                <p className="text-sm text-gray-600">{t.dashboard.meetingCode}: 222888</p>
               </div>
             </div>
           </div>
@@ -224,11 +215,10 @@ export default function DashboardPage() {
           <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                Credit Flow AI Client Portal
+                {t.dashboard.clientPortal}
               </h3>
               <p className="mb-4 text-sm text-gray-600">
-                Use this link to invite clients to our secure portal to view
-                their Epic Pro report, generated letters, and upload documents.
+                {t.dashboard.clientPortalDesc}
               </p>
               <div className="flex items-center gap-2 rounded border border-gray-300 bg-gray-50 p-3">
                 <input
@@ -245,17 +235,17 @@ export default function DashboardPage() {
                   }}
                   className="rounded px-3 py-1 text-sm text-gray-600 hover:bg-gray-200"
                 >
-                  Copy
+                  {t.dashboard.copy}
                 </button>
               </div>
             </div>
 
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                Credit Flow AI Affiliate Link
+                {t.dashboard.affiliateLink}
               </h3>
               <p className="mb-4 text-sm text-gray-600">
-                Use this link to invite Users To Signup Up.
+                {t.dashboard.affiliateLinkDesc}
               </p>
               <div className="flex items-center gap-2 rounded border border-gray-300 bg-gray-50 p-3">
                 <input
@@ -272,7 +262,7 @@ export default function DashboardPage() {
                   }}
                   className="rounded px-3 py-1 text-sm text-gray-600 hover:bg-gray-200"
                 >
-                  Copy
+                  {t.dashboard.copy}
                 </button>
               </div>
             </div>
@@ -281,10 +271,10 @@ export default function DashboardPage() {
           {/* Profile Completion */}
           <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
             <h3 className="mb-4 text-lg font-semibold text-gray-900">
-              Profile Completion
+              {t.dashboard.profileCompletion}
             </h3>
             <p className="mb-2 text-sm text-gray-600">
-              Your Profile is 80% complete
+              {t.dashboard.profileCompletePercent}
             </p>
             <div className="mb-4 h-2 w-full rounded-full bg-gray-200">
               <div
@@ -293,7 +283,7 @@ export default function DashboardPage() {
               ></div>
             </div>
             <button className="rounded bg-green-600 px-6 py-2 text-sm font-medium text-white hover:bg-green-700">
-              Complete Your Profile
+              {t.dashboard.completeYourProfile}
             </button>
           </div>
         </main>
