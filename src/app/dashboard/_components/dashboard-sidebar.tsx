@@ -3,17 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/app/dashboard/_context/language-context";
+import { useTheme } from "@/app/dashboard/_context/theme-context";
 
 interface DashboardSidebarProps {
   currentPath: string;
   sidebarOpen: boolean;
   onClose: () => void;
-}
-
-function itemClass(isActive: boolean) {
-  return isActive
-    ? "block rounded border border-blue-800/60 bg-white/10 px-3 py-2 text-sm font-medium text-emerald-300"
-    : "block rounded px-3 py-2 text-sm text-blue-200 hover:bg-white/10 hover:text-emerald-300";
 }
 
 export default function DashboardSidebar({
@@ -22,6 +17,17 @@ export default function DashboardSidebar({
   onClose,
 }: DashboardSidebarProps) {
   const { t } = useLanguage();
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+
+  const itemClass = (isActive: boolean) =>
+    isActive
+      ? isLight
+        ? "block rounded border border-emerald-500/60 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700"
+        : "block rounded border border-blue-800/60 bg-white/10 px-3 py-2 text-sm font-medium text-emerald-300"
+      : isLight
+        ? "block rounded px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 hover:text-emerald-600"
+        : "block rounded px-3 py-2 text-sm text-blue-200 hover:bg-white/10 hover:text-emerald-300";
 
   const accountItems = [
     { href: "/dashboard/setup", label: t.sidebar.setupClientPortal },
@@ -50,9 +56,9 @@ export default function DashboardSidebar({
       {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/60 md:hidden" onClick={onClose} />}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 transform border-r border-blue-900/40 bg-[#0a0a2a] p-4 shadow-lg transition-transform duration-200 ease-out md:static md:z-auto md:block md:translate-x-0 md:shadow-none ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        }`}
+        className={`fixed inset-y-0 left-0 z-40 w-64 transform border-r p-4 shadow-lg transition-transform duration-200 ease-out md:static md:z-auto md:block md:translate-x-0 md:shadow-none ${
+          isLight ? "border-slate-200 bg-slate-50" : "border-blue-900/40 bg-[#0a0a2a]"
+        } ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         <div className="mb-8 flex justify-center">
           <Image
@@ -60,14 +66,14 @@ export default function DashboardSidebar({
             alt="CreditFlow AI Logo"
             width={220}
             height={88}
-            className="h-auto w-auto max-w-[220px] object-contain"
+            className={`h-auto w-auto max-w-[220px] object-contain ${isLight ? "invert" : ""}`}
             priority
           />
         </div>
 
         <nav className="space-y-2">
           <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-blue-300">{t.sidebar.account}</p>
+            <p className={`text-xs font-semibold uppercase ${isLight ? "text-slate-500" : "text-blue-300"}`}>{t.sidebar.account}</p>
             {accountItems.map((item) => (
               <Link key={item.href} href={item.href} className={itemClass(currentPath === item.href)}>
                 {item.label}
@@ -76,7 +82,7 @@ export default function DashboardSidebar({
           </div>
 
           <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-blue-300">{t.sidebar.main}</p>
+            <p className={`text-xs font-semibold uppercase ${isLight ? "text-slate-500" : "text-blue-300"}`}>{t.sidebar.main}</p>
             {mainItems.map((item) => (
               <Link key={item.href} href={item.href} className={itemClass(currentPath === item.href)}>
                 {item.label}
@@ -85,7 +91,7 @@ export default function DashboardSidebar({
           </div>
 
           <div className="mb-4">
-            <p className="text-xs font-semibold uppercase text-blue-300">{t.sidebar.support}</p>
+            <p className={`text-xs font-semibold uppercase ${isLight ? "text-slate-500" : "text-blue-300"}`}>{t.sidebar.support}</p>
             {supportItems.map((item) => (
               <Link key={item.href} href={item.href} className={itemClass(currentPath === item.href)}>
                 {item.label}

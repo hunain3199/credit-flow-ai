@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
+import { useTheme } from "@/app/dashboard/_context/theme-context";
 
 interface User {
   id: string;
@@ -15,6 +16,7 @@ interface User {
 export default function ClientAccountPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const { theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -63,7 +65,7 @@ export default function ClientAccountPage() {
   const userName = user.name || user.email.split("@")[0];
 
   return (
-    <div className="dashboard-theme flex min-h-screen bg-[#0a0a2a]">
+    <div className={`dashboard-theme flex min-h-screen ${theme === "light" ? "dashboard-theme-light" : "bg-[#0a0a2a]"}`}>
       <DashboardSidebar
         currentPath="/dashboard/client-account"
         sidebarOpen={sidebarOpen}
@@ -77,7 +79,7 @@ export default function ClientAccountPage() {
           onLogout={handleLogout}
         />
 
-        <main className="flex-1 overflow-y-auto bg-[#0a0a2a] px-4 py-6 md:px-8">
+        <main className={`flex-1 overflow-y-auto px-4 py-6 md:px-8 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <div className="mx-auto max-w-6xl rounded-xl border border-gray-200 bg-white p-4 shadow-sm md:p-6 lg:p-8">
             <div className="mb-4 flex items-center justify-between border-b border-gray-200 pb-3">
               <h1 className="text-lg font-semibold text-gray-900">

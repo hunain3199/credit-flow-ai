@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
+import { useTheme } from "@/app/dashboard/_context/theme-context";
 
 interface User {
   id: string;
@@ -14,6 +15,7 @@ interface User {
 export default function AffiliatePage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const { theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -60,7 +62,7 @@ export default function AffiliatePage() {
   const affiliateLink = `https://creditflowai.com/register/${user.id}`;
 
   return (
-    <div className="dashboard-theme flex min-h-screen bg-[#0a0a2a]">
+    <div className={`dashboard-theme flex min-h-screen ${theme === "light" ? "dashboard-theme-light" : "bg-[#0a0a2a]"}`}>
       <DashboardSidebar
         currentPath="/dashboard/affiliate"
         sidebarOpen={sidebarOpen}
@@ -77,7 +79,7 @@ export default function AffiliatePage() {
         />
 
         {/* Affiliate content */}
-        <main className="flex-1 overflow-y-auto bg-[#0a0a2a] px-4 py-8 md:px-8">
+        <main className={`flex-1 overflow-y-auto px-4 py-8 md:px-8 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <div className="mx-auto flex max-w-4xl flex-col gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:p-8">
             <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
               <div>

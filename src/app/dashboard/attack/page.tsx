@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
+import { useTheme } from "@/app/dashboard/_context/theme-context";
 
 interface User {
   id: string;
@@ -15,6 +16,7 @@ export default function AttackAreaPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const { theme } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(true);
 
@@ -64,7 +66,7 @@ export default function AttackAreaPage() {
   const userName = user.name || user.email.split("@")[0];
 
   return (
-    <div className="dashboard-theme flex min-h-screen bg-[#0a0a2a]">
+    <div className={`dashboard-theme flex min-h-screen ${theme === "light" ? "dashboard-theme-light" : "bg-[#0a0a2a]"}`}>
       {/* Alert Dialog */}
       {showAlert && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
@@ -107,7 +109,7 @@ export default function AttackAreaPage() {
         />
 
         {/* Attack Area content */}
-        <main className="flex-1 overflow-y-auto bg-[#0a0a2a] px-4 py-8 md:px-8">
+        <main className={`flex-1 overflow-y-auto px-4 py-8 md:px-8 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-6 text-2xl font-bold text-gray-900">
               Attack Area

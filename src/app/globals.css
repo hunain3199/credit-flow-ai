@@ -112,3 +112,114 @@ body {
   background: #ffffff;
   color: #111827;
 }
+
+/* Light theme overrides */
+.dashboard-theme.dashboard-theme-light {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Force readable text in light mode (override dark-mode blue/light colors) */
+.dashboard-theme.dashboard-theme-light .text-blue-200,
+.dashboard-theme.dashboard-theme-light .text-blue-100,
+.dashboard-theme.dashboard-theme-light .text-blue-300,
+.dashboard-theme.dashboard-theme-light .text-blue-400,
+.dashboard-theme.dashboard-theme-light .text-gray-300,
+.dashboard-theme.dashboard-theme-light .text-gray-400 {
+  color: #334155 !important;
+}
+
+/* Pricing cards and other content use text-white; make it dark in light theme */
+.dashboard-theme.dashboard-theme-light .text-white {
+  color: #0f172a !important;
+}
+/* Keep white text on emerald buttons and badges */
+.dashboard-theme.dashboard-theme-light .bg-emerald-500.text-white,
+.dashboard-theme.dashboard-theme-light .bg-emerald-600.text-white,
+.dashboard-theme.dashboard-theme-light .bg-emerald-500 .text-white,
+.dashboard-theme.dashboard-theme-light .bg-emerald-600 .text-white {
+  color: #ffffff !important;
+}
+
+.dashboard-theme.dashboard-theme-light .bg-white {
+  background: #ffffff !important;
+}
+
+.dashboard-theme.dashboard-theme-light .bg-gray-50 {
+  background: #f8fafc !important;
+}
+
+.dashboard-theme.dashboard-theme-light .border-gray-200,
+.dashboard-theme.dashboard-theme-light .border-gray-300 {
+  border-color: rgb(203 213 225) !important;
+}
+
+.dashboard-theme.dashboard-theme-light .text-gray-900 {
+  color: #0f172a !important;
+}
+
+.dashboard-theme.dashboard-theme-light .text-gray-800,
+.dashboard-theme.dashboard-theme-light .text-gray-700,
+.dashboard-theme.dashboard-theme-light .text-gray-600,
+.dashboard-theme.dashboard-theme-light .text-gray-500 {
+  color: #475569 !important;
+}
+
+.dashboard-theme.dashboard-theme-light .text-gray-400 {
+  color: #64748b !important;
+}
+
+.dashboard-theme.dashboard-theme-light .hover\:bg-gray-100:hover {
+  background: rgb(241 245 249) !important;
+}
+
+.dashboard-theme.dashboard-theme-light .hover\:bg-gray-200:hover {
+  background: rgb(226 232 240) !important;
+}
+
+.dashboard-theme.dashboard-theme-light .bg-gray-100 {
+  background: rgb(241 245 249) !important;
+}
+
+.dashboard-theme.dashboard-theme-light .divide-gray-100 > :not([hidden]) ~ :not([hidden]),
+.dashboard-theme.dashboard-theme-light .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgb(226 232 240) !important;
+}
+
+.dashboard-theme.dashboard-theme-light table thead tr {
+  background: rgb(16 185 129 / 0.9) !important;
+}
+
+.dashboard-theme.dashboard-theme-light table tbody {
+  background: #ffffff !important;
+}
+
+.dashboard-theme.dashboard-theme-light table th {
+  color: #ffffff !important;
+}
+
+.dashboard-theme.dashboard-theme-light button:not([class*="bg-"]) {
+  color: #334155 !important;
+}
+
+.dashboard-theme.dashboard-theme-light a {
+  color: inherit;
+}
+
+/* Ensure placeholder text is visible in light theme */
+.dashboard-theme.dashboard-theme-light .placeholder-gray-500::placeholder {
+  color: rgb(100 116 139) !important;
+}
+
+.dashboard-theme.dashboard-theme-light input,
+.dashboard-theme.dashboard-theme-light select,
+.dashboard-theme.dashboard-theme-light textarea {
+  border-color: rgb(203 213 225) !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+.dashboard-theme.dashboard-theme-light input::placeholder,
+.dashboard-theme.dashboard-theme-light textarea::placeholder {
+  color: rgb(100 116 139 / 0.8) !important;
+}

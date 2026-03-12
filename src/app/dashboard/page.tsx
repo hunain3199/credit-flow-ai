@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 import { useLanguage } from "@/app/dashboard/_context/language-context";
+import { useTheme } from "@/app/dashboard/_context/theme-context";
 
 interface User {
   id: string;
@@ -15,6 +16,7 @@ interface User {
 export default function DashboardPage() {
   const router = useRouter();
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -60,7 +62,7 @@ export default function DashboardPage() {
   const userName = user.name || user.email.split("@")[0];
 
   return (
-    <div className="dashboard-theme flex min-h-screen bg-[#0a0a2a]">
+    <div className={`dashboard-theme flex min-h-screen ${theme === "light" ? "dashboard-theme-light" : "bg-[#0a0a2a]"}`}>
       <DashboardSidebar
         currentPath="/dashboard"
         sidebarOpen={sidebarOpen}
@@ -77,7 +79,7 @@ export default function DashboardPage() {
         />
 
         {/* Dashboard Content */}
-        <main className="flex-1 overflow-y-auto bg-[#0a0a2a] p-6">
+        <main className={`flex-1 overflow-y-auto p-6 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <h2 className="mb-6 text-2xl font-bold text-gray-900">
             {t.dashboard.welcome.replace("{name}", userName)}
           </h2>

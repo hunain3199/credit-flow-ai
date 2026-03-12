@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
+import { useTheme } from "@/app/dashboard/_context/theme-context";
 
 interface User {
   id: string;
@@ -15,6 +16,7 @@ interface User {
 export default function ManageClientsPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const { theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -60,7 +62,7 @@ export default function ManageClientsPage() {
   const userName = user.name || user.email.split("@")[0];
 
   return (
-    <div className="dashboard-theme flex min-h-screen bg-[#0a0a2a]">
+    <div className={`dashboard-theme flex min-h-screen ${theme === "light" ? "dashboard-theme-light" : "bg-[#0a0a2a]"}`}>
       <DashboardSidebar
         currentPath="/dashboard/clients"
         sidebarOpen={sidebarOpen}
@@ -77,7 +79,7 @@ export default function ManageClientsPage() {
         />
 
         {/* Manage clients content */}
-        <main className="flex-1 overflow-y-auto bg-[#0a0a2a] px-3 py-6 sm:px-4 md:px-6 lg:px-8 md:py-8">
+        <main className={`flex-1 overflow-y-auto px-3 py-6 sm:px-4 md:px-6 lg:px-8 md:py-8 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <div className="mx-auto max-w-7xl">
             <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl">
               Manage All Clients

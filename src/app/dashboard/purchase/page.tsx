@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
+import { useTheme } from "@/app/dashboard/_context/theme-context";
 
 interface User {
   id: string;
@@ -15,6 +16,7 @@ type TabKey = "buy" | "packages" | "enterprise";
 
 export default function PurchaseCreditsPage() {
   const router = useRouter();
+  const { theme } = useTheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -63,7 +65,7 @@ export default function PurchaseCreditsPage() {
   const paymentLink = "https://fs12.formsite.com/C2Ygy3/bycqdj8y9g/index";
 
   return (
-    <div className="dashboard-theme flex min-h-screen bg-[#0a0a2a]">
+    <div className={`dashboard-theme flex min-h-screen ${theme === "light" ? "dashboard-theme-light" : "bg-[#0a0a2a]"}`}>
       <DashboardSidebar
         currentPath="/dashboard/purchase"
         sidebarOpen={sidebarOpen}
@@ -80,7 +82,7 @@ export default function PurchaseCreditsPage() {
         />
 
         {/* Purchase content */}
-        <main className="flex-1 overflow-y-auto bg-[#0a0a2a] px-4 py-8 md:px-8">
+        <main className={`flex-1 overflow-y-auto px-4 py-8 md:px-8 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <div className="mx-auto max-w-5xl rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:p-8">
             <h2 className="mb-4 text-xl font-semibold text-gray-900">
               Get Started
