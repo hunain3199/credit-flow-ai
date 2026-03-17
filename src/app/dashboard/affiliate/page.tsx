@@ -5,46 +5,29 @@ import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 import { useTheme } from "@/app/dashboard/_context/theme-context";
-
-interface User {
-  id: string;
-  email: string;
-  name: string | null;
-}
+import { getStoredUser, getStoredToken, clearAuth, getDisplayName } from "@/lib/auth-client";
 
 export default function AffiliatePage() {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<ReturnType<typeof getStoredUser>>(null);
   const { theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const res = await fetch("/api/auth/me");
-        if (!res.ok) {
-          router.push("/login");
-          return;
-        }
-        const data = await res.json();
-        setUser(data.user);
-      } catch {
-        router.push("/login");
-      } finally {
-        setLoading(false);
-      }
+    const u = getStoredUser();
+    const token = getStoredToken();
+    if (!u || !token) {
+      router.push("/login");
+      return;
     }
-    fetchUser();
+    setUser(u);
+    setLoading(false);
   }, [router]);
 
-  async function handleLogout() {
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/login");
-    } catch {
-      router.push("/login");
-    }
+  function handleLogout() {
+    clearAuth();
+    router.push("/login");
   }
 
   if (loading) {
@@ -57,7 +40,7 @@ export default function AffiliatePage() {
 
   if (!user) return null;
 
-  const userName = user.name || user.email.split("@")[0];
+  const userName = getDisplayName(user);
 
   const affiliateLink = `https://creditflowai.com/register/${user.id}`;
 

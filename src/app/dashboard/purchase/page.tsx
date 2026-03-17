@@ -5,49 +5,32 @@ import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 import { useTheme } from "@/app/dashboard/_context/theme-context";
-
-interface User {
-  id: string;
-  email: string;
-  name: string | null;
-}
+import { getStoredUser, getStoredToken, clearAuth, getDisplayName } from "@/lib/auth-client";
 
 type TabKey = "buy" | "packages" | "enterprise";
 
 export default function PurchaseCreditsPage() {
   const router = useRouter();
   const { theme } = useTheme();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<ReturnType<typeof getStoredUser>>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("buy");
 
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const res = await fetch("/api/auth/me");
-        if (!res.ok) {
-          router.push("/login");
-          return;
-        }
-        const data = await res.json();
-        setUser(data.user);
-      } catch {
-        router.push("/login");
-      } finally {
-        setLoading(false);
-      }
+    const u = getStoredUser();
+    const token = getStoredToken();
+    if (!u || !token) {
+      router.push("/login");
+      return;
     }
-    fetchUser();
+    setUser(u);
+    setLoading(false);
   }, [router]);
 
-  async function handleLogout() {
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/login");
-    } catch {
-      router.push("/login");
-    }
+  function handleLogout() {
+    clearAuth();
+    router.push("/login");
   }
 
   if (loading) {
@@ -60,7 +43,7 @@ export default function PurchaseCreditsPage() {
 
   if (!user) return null;
 
-  const userName = user.name || user.email.split("@")[0];
+  const userName = getDisplayName(user);
 
   const paymentLink = "https://fs12.formsite.com/C2Ygy3/bycqdj8y9g/index";
 

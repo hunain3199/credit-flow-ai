@@ -4,6 +4,8 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { setAuth, type AuthUser } from "@/lib/auth-client";
+import { API_BASE } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,24 +20,55 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
-      const data = (await res.json().catch(() => null)) as
-        | { message?: string }
-        | null;
+      const data = (await res.json().catch(() => null)) as Record<string, unknown> | null;
 
       if (!res.ok) {
-        setError(data?.message || "Failed to log in");
+        const msg = (data?.message as string) || (data?.error as string) || "Failed to log in";
+        setError(typeof msg === "string" ? msg : "Failed to log in");
         return;
       }
 
-      router.push("/dashboard");
+      const token =
+        (data?.token as string) ??
+        (data?.accessToken as string) ??
+        (data?.access_token as string) ??
+        ((data?.data as Record<string, unknown>)?.token as string) ??
+        ((data?.data as Record<string, unknown>)?.accessToken as string) ??
+        ((data?.data as Record<string, unknown>)?.access_token as string);
+      const nestedUser =
+        (data?.user as AuthUser) ?? ((data?.data as Record<string, unknown>)?.user as AuthUser);
+      const authUser: AuthUser = nestedUser
+        ? {
+            id: nestedUser.id ?? "",
+            email: nestedUser.email ?? email.trim(),
+            firstName: nestedUser.firstName,
+            lastName: nestedUser.lastName,
+            name: nestedUser.name,
+            phoneNumber: nestedUser.phoneNumber,
+          }
+        : {
+            id: (data?.id as string) ?? "",
+            email: (data?.email as string) ?? email.trim(),
+            firstName: (data?.firstName as string) ?? undefined,
+            lastName: (data?.lastName as string) ?? undefined,
+            name: undefined,
+            phoneNumber: (data?.phoneNumber as string) ?? undefined,
+          };
+
+      if (token) {
+        setAuth(token, authUser);
+        router.push("/dashboard");
+      } else {
+        setError(
+          "Invalid response from server. Check browser Network tab for the login response."
+        );
+      }
     } catch (err) {
       setError("Something went wrong. Please try again.");
     } finally {

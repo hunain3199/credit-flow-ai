@@ -4,11 +4,14 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { API_BASE } from "@/lib/api";
 
 export default function SignupPage() {
   const router = useRouter();
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,12 +22,16 @@ export default function SignupPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch(`${API_BASE}/api/v1/auth/register`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          email: email.trim(),
+          phoneNumber: phoneNumber.trim() || undefined,
+          password,
+        }),
       });
 
       const data = (await res.json().catch(() => null)) as
@@ -67,18 +74,35 @@ export default function SignupPage() {
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
             <label
-              htmlFor="name"
+              htmlFor="firstName"
               className="block text-sm font-medium text-blue-200"
             >
-              Name
+              First name
             </label>
             <input
-              id="name"
+              id="firstName"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               className="mt-1 w-full rounded-lg border border-blue-800/50 bg-white/10 px-3 py-2.5 text-sm text-white placeholder-blue-300/60 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50"
-              placeholder="Jane Doe"
+              placeholder="John"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="lastName"
+              className="block text-sm font-medium text-blue-200"
+            >
+              Last name
+            </label>
+            <input
+              id="lastName"
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="mt-1 w-full rounded-lg border border-blue-800/50 bg-white/10 px-3 py-2.5 text-sm text-white placeholder-blue-300/60 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50"
+              placeholder="Doe"
             />
           </div>
 
@@ -97,6 +121,23 @@ export default function SignupPage() {
               className="mt-1 w-full rounded-lg border border-blue-800/50 bg-white/10 px-3 py-2.5 text-sm text-white placeholder-blue-300/60 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50"
               placeholder="you@example.com"
               required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="phoneNumber"
+              className="block text-sm font-medium text-blue-200"
+            >
+              Phone number
+            </label>
+            <input
+              id="phoneNumber"
+              type="tel"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="mt-1 w-full rounded-lg border border-blue-800/50 bg-white/10 px-3 py-2.5 text-sm text-white placeholder-blue-300/60 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50"
+              placeholder="+1234567890"
             />
           </div>
 

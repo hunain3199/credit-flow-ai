@@ -6,47 +6,30 @@ import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 import { useLanguage } from "@/app/dashboard/_context/language-context";
 import { useTheme } from "@/app/dashboard/_context/theme-context";
-
-interface User {
-  id: string;
-  email: string;
-  name: string | null;
-}
+import { getStoredUser, getStoredToken, clearAuth, getDisplayName } from "@/lib/auth-client";
 
 export default function DashboardPage() {
   const router = useRouter();
   const { t } = useLanguage();
   const { theme } = useTheme();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<ReturnType<typeof getStoredUser>>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const res = await fetch("/api/auth/me");
-        if (!res.ok) {
-          router.push("/login");
-          return;
-        }
-        const data = await res.json();
-        setUser(data.user);
-      } catch (error) {
-        router.push("/login");
-      } finally {
-        setLoading(false);
-      }
+    const u = getStoredUser();
+    const token = getStoredToken();
+    if (!u || !token) {
+      router.push("/login");
+      return;
     }
-    fetchUser();
+    setUser(u);
+    setLoading(false);
   }, [router]);
 
-  async function handleLogout() {
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/login");
-    } catch (error) {
-      router.push("/login");
-    }
+  function handleLogout() {
+    clearAuth();
+    router.push("/login");
   }
 
   if (loading) {
@@ -59,7 +42,7 @@ export default function DashboardPage() {
 
   if (!user) return null;
 
-  const userName = user.name || user.email.split("@")[0];
+  const userName = getDisplayName(user);
 
   return (
     <div className={`dashboard-theme flex min-h-screen ${theme === "light" ? "dashboard-theme-light" : "bg-[#0a0a2a]"}`}>
