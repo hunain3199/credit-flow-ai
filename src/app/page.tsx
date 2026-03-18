@@ -45,8 +45,11 @@ export default function Home() {
 
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/app/dashboard/_context/language-context";
 
 export default function Page() {
+  const { t } = useLanguage();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [creditScore, setCreditScore] = useState("");
@@ -69,15 +72,24 @@ export default function Page() {
       });
       const data = (await res.json()) as { message?: string };
       if (!res.ok) {
-        setMessage({ type: "error", text: data.message || "Something went wrong." });
+        setMessage({
+          type: "error",
+          text: data.message || t.landing.errorMessage,
+        });
         return;
       }
-      setMessage({ type: "success", text: data.message || "You're signed up for product updates!" });
+      setMessage({
+        type: "success",
+        text: data.message || t.landing.successMessage,
+      });
       setName("");
       setEmail("");
       setCreditScore("");
     } catch {
-      setMessage({ type: "error", text: "Something went wrong. Please try again." });
+      setMessage({
+        type: "error",
+        text: t.landing.errorMessagePleaseTryAgain,
+      });
     } finally {
       setLoading(false);
     }
@@ -100,10 +112,10 @@ export default function Page() {
           </div>
         </Link>
         <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl text-center mb-4">
-          Coming Soon
+          {t.landing.comingSoonTitle}
         </h1>
         <p className="text-lg text-blue-200 md:text-xl text-center max-w-md mb-8">
-          We&apos;re building something great. Fix your credit the smart way with AI.
+          {t.landing.heroDescription}
         </p>
 
         {/* Product updates signup form */}
@@ -112,12 +124,12 @@ export default function Page() {
           className="mb-8 w-full max-w-md rounded-2xl border border-blue-800/50 bg-white/5 p-6 shadow-lg backdrop-blur-sm"
         >
           <p className="mb-4 text-center text-sm text-blue-200">
-            Get product updates — we&apos;ll keep you in the loop.
+            {t.landing.productUpdatesIntro}
           </p>
           <div className="space-y-4">
             <div>
               <label htmlFor="name" className="mb-1 block text-sm font-medium text-blue-200">
-                Name
+                {t.landing.nameLabel}
               </label>
               <input
                 id="name"
@@ -125,13 +137,13 @@ export default function Page() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
+                placeholder={t.landing.namePlaceholder}
                 className="w-full rounded-lg border border-blue-800/50 bg-white/10 px-4 py-2.5 text-white placeholder-blue-300/60 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
               />
             </div>
             <div>
               <label htmlFor="email" className="mb-1 block text-sm font-medium text-blue-200">
-                Email
+                {t.landing.emailLabel}
               </label>
               <input
                 id="email"
@@ -139,13 +151,13 @@ export default function Page() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
+                placeholder={t.landing.emailPlaceholder}
                 className="w-full rounded-lg border border-blue-800/50 bg-white/10 px-4 py-2.5 text-white placeholder-blue-300/60 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
               />
             </div>
             <div>
               <label htmlFor="creditScore" className="mb-1 block text-sm font-medium text-blue-200">
-                Credit Score <span className="text-blue-400/80">(optional, 300–850)</span>
+                {t.landing.creditScoreLabel}
               </label>
               <input
                 id="creditScore"
@@ -154,7 +166,7 @@ export default function Page() {
                 max={850}
                 value={creditScore}
                 onChange={(e) => setCreditScore(e.target.value)}
-                placeholder="e.g. 650"
+                placeholder={t.landing.creditScorePlaceholder}
                 className="w-full rounded-lg border border-blue-800/50 bg-white/10 px-4 py-2.5 text-white placeholder-blue-300/60 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
               />
             </div>
@@ -163,7 +175,7 @@ export default function Page() {
               disabled={loading}
               className="w-full rounded-lg bg-emerald-500 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
             >
-              {loading ? "Submitting…" : "Notify me"}
+              {loading ? t.landing.submitting : t.landing.notifyMe}
             </button>
           </div>
           {message && (
@@ -182,13 +194,13 @@ export default function Page() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
           </span>
-          <span className="text-sm text-blue-200">Stay tuned</span>
+          <span className="text-sm text-blue-200">{t.landing.stayTuned}</span>
         </div>
       </main>
 
       <footer className="border-t border-blue-900/30 px-4 py-8 md:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl text-center text-sm text-blue-300">
-          <p>&copy; 2026 CreditFlow AI. All rights reserved.</p>
+          <p>{t.landing.footerCopyright}</p>
         </div>
       </footer>
 

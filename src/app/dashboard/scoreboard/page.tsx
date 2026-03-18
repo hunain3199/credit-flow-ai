@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 import { useTheme } from "@/app/dashboard/_context/theme-context";
+import { useLanguage } from "@/app/dashboard/_context/language-context";
 import { getStoredUser, getStoredToken, clearAuth, getDisplayName } from "@/lib/auth-client";
 
 export default function ClientScoreboardPage() {
@@ -12,6 +13,7 @@ export default function ClientScoreboardPage() {
   const [user, setUser] = useState<ReturnType<typeof getStoredUser>>(null);
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedReport, setSelectedReport] = useState("");
@@ -35,7 +37,7 @@ export default function ClientScoreboardPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0a0a2a]">
-        <p className="text-sm text-blue-200">Loading...</p>
+        <p className="text-sm text-blue-200">{t.dashboard.loading}</p>
       </div>
     );
   }
@@ -71,35 +73,35 @@ export default function ClientScoreboardPage() {
         <main className={`flex-1 overflow-y-auto px-4 py-8 md:px-8 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-6 text-2xl font-bold text-gray-900">
-              Client&apos;s Score Board
+              {t.scoreboard.pageTitle}
             </h2>
 
             {/* Filters */}
             <div className="mb-8 grid gap-4 md:grid-cols-2">
               <div className="space-y-1">
                 <label className="text-xs font-medium uppercase text-blue-200">
-                  Select client for score evaluation
+                  {t.scoreboard.selectClientLabel}
                 </label>
                 <select
                   value={selectedClient}
                   onChange={(e) => setSelectedClient(e.target.value)}
                   className="w-full rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
                 >
-                  <option value="">Select Client(s)</option>
-                  <option value="sample">Sample Client</option>
+                  <option value="">{t.scoreboard.selectClientPlaceholder}</option>
+                  <option value="sample">{t.scoreboard.sampleClient}</option>
                 </select>
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-medium uppercase text-blue-200">
-                  Select Report
+                  {t.scoreboard.selectReportLabel}
                 </label>
                 <select
                   value={selectedReport}
                   onChange={(e) => setSelectedReport(e.target.value)}
                   className="w-full rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
                 >
-                  <option value="">Select Report</option>
-                  <option value="latest">Latest Report</option>
+                  <option value="">{t.scoreboard.selectReportPlaceholder}</option>
+                  <option value="latest">{t.scoreboard.latestReport}</option>
                 </select>
               </div>
             </div>
@@ -142,7 +144,9 @@ export default function ClientScoreboardPage() {
                         </span>
                       </div>
                     </div>
-                    <p className="text-xs text-gray-500">Prev Score: --</p>
+                    <p className="text-xs text-gray-500">
+                      {t.scoreboard.prevScoreLabel} --
+                    </p>
                   </div>
 
                   {/* Metrics table */}
@@ -154,25 +158,18 @@ export default function ClientScoreboardPage() {
                             {bureau.name}
                           </th>
                           <th className="px-4 py-2 text-right font-semibold">
-                            Current Record
+                            {t.scoreboard.currentRecordHeader}
                           </th>
                           <th className="px-4 py-2 text-right font-semibold">
-                            Previous Record
+                            {t.scoreboard.previousRecordHeader}
                           </th>
                           <th className="px-4 py-2 text-right font-semibold">
-                            Difference
+                            {t.scoreboard.differenceHeader}
                           </th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-100">
-                        {[
-                          "Total Accounts",
-                          "Closed Accounts",
-                          "Delinquent",
-                          "Derogatory",
-                          "Inquiries",
-                          "Public Records",
-                        ].map((label) => (
+                        {t.scoreboard.metricLabels.map((label) => (
                           <tr key={label}>
                             <td className="px-4 py-2 text-left text-gray-800">
                               {label}

@@ -5,22 +5,14 @@ import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 import { useTheme } from "@/app/dashboard/_context/theme-context";
+import { useLanguage } from "@/app/dashboard/_context/language-context";
 import { getStoredUser, getStoredToken, clearAuth, getDisplayName } from "@/lib/auth-client";
-
-const trainingCards = [
-  { title: "Super Simple Outline Of Steps to enter Client details OM2C-PROPERLY.", type: "doc" },
-  { title: "Software Related Terminologies", type: "doc" },
-  { title: "2023 CDIA's CRRG aka Metro 2 Guidelines", type: "video" },
-  { title: "Software Enhancements", type: "doc" },
-  { title: "Common facts about M2Gala software", type: "doc" },
-  { title: "M2 GALA Client Sign-Up", type: "video" },
-  { title: "How to Register in M2 Gala", type: "video" },
-] as const;
 
 export default function TrainingVideosPage() {
   const router = useRouter();
   const [user, setUser] = useState<ReturnType<typeof getStoredUser>>(null);
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -43,7 +35,7 @@ export default function TrainingVideosPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0a0a2a]">
-        <p className="text-sm text-blue-200">Loading...</p>
+        <p className="text-sm text-blue-200">{t.dashboard.loading}</p>
       </div>
     );
   }
@@ -69,10 +61,12 @@ export default function TrainingVideosPage() {
 
         <main className={`flex-1 overflow-y-auto px-3 py-6 sm:px-4 md:px-6 lg:px-8 md:py-8 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <div className="mx-auto w-full max-w-7xl">
-            <h2 className="mb-6 text-4xl font-semibold text-gray-900">Education Room</h2>
+            <h2 className="mb-6 text-4xl font-semibold text-gray-900">
+              {t.training.pageTitle}
+            </h2>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-              {trainingCards.map((card, idx) => (
+              {t.training.cards.map((card, idx) => (
                 <div key={`${card.title}-${idx}`} className="text-center">
                   <div className="mb-3 overflow-hidden border border-gray-400 bg-white">
                     {card.type === "video" ? (
@@ -80,7 +74,7 @@ export default function TrainingVideosPage() {
                         width="560"
                         height="315"
                         src="https://www.youtube.com/embed/o-kwvuuvd6U?si=sDflbkx5stFdgsil"
-                        title="YouTube video player"
+                        title={t.training.videoPlayerTitle}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerPolicy="strict-origin-when-cross-origin"
@@ -90,7 +84,7 @@ export default function TrainingVideosPage() {
                     ) : (
                       <div className="flex h-[240px] w-full items-center justify-center bg-gray-50 px-4">
                         <p className="text-sm text-gray-700">
-                          Training document preview
+                          {t.training.documentPreviewText}
                         </p>
                       </div>
                     )}

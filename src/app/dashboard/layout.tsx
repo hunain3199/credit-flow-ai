@@ -1,6 +1,5 @@
 "use client";
 
-import { LanguageProvider } from "@/app/dashboard/_context/language-context";
 import { ThemeProvider } from "@/app/dashboard/_context/theme-context";
 
 export default function DashboardLayout({
@@ -9,8 +8,6 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <LanguageProvider>
-      <ThemeProvider>{children}</ThemeProvider>
-    </LanguageProvider>
+    <ThemeProvider>{children}</ThemeProvider>
   );
 }

@@ -5,65 +5,15 @@ import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 import { useTheme } from "@/app/dashboard/_context/theme-context";
+import { useLanguage } from "@/app/dashboard/_context/language-context";
 import { getStoredUser, getStoredToken, clearAuth, getDisplayName } from "@/lib/auth-client";
-
-const FAQ_ITEMS = [
-  {
-    question: "Attack Type Initials and Names",
-    answer: `Attack Type Initials and Name:
-
-BAS [Base Attack Types]:
-- FDA = Factual Disputing Attack
-- CLA = Consumer Law Attack
-- OM2C = Original Metro 2 Compliance
-- LAVA = Lawful Accuracy Verification Analytics
-
-CATS [Combined Attack Types]:
-- GAS-D = Global Automated Strategies per Destination
-- GAS-T = Global Automated Strategies per Item
-- GAS-N = Global Automated Strategies per Primary Negativity Type
-
-FIRE-D = Factual Forensic In-depth Investigative Review & Remediation Escalation per Destination
-FIRE-T = Factual Forensic In-depth Investigative Review & Remediation Escalation per Item
-FIRE-N = Factual Forensic In-depth Investigative Review & Remediation Escalation per Primary Negativity Type
-
-SANs [Super Attack Types]:
-- MILKA-DAD = Multiple Item attack with limited key arguments against deviations in data accuracy
-- SEEM-MIC = Super Enhanced & Effective Metro2 Multiple Item Challenge
-- SILKA-DAD = Single Item attack with limited key arguments against deviations in data accuracy
-- SEEM-SIC = Super Enhanced & Effective Metro2 Single Item Challenge
-
-LATs [Content Box Level Attack Types]:
-- ICBA = Item-based Content Box Level Attacks
-- DCBA = Destination-based Content Box Level Attacks
-- NCBA = Primary Negativity Type-based Content Box Level Attacks`,
-  },
-  {
-    question: "What does Attack Focus mean?",
-    answer:
-      "The software creates letters for each bureau (TransUnion, Experian, Equifax) and each destination or creditor tied to the selected attack strategy.",
-  },
-  {
-    question: "What is Attack Destination?",
-    answer:
-      "Attack destination is the bureau or data furnisher/creditor where the dispute letter is routed.",
-  },
-  {
-    question: "How much credits cost",
-    answer: "Please click here to view the pricing details.",
-  },
-  {
-    question: "How long after I purchase a credit does it show up in my account?",
-    answer:
-      "Credits usually appear in your account within 24 hours. If they do not appear after that, submit a support ticket.",
-  },
-];
 
 export default function FaqPage() {
   const router = useRouter();
   const [user, setUser] = useState<ReturnType<typeof getStoredUser>>(null);
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -86,7 +36,7 @@ export default function FaqPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0a0a2a]">
-        <p className="text-sm text-blue-200">Loading...</p>
+        <p className="text-sm text-blue-200">{t.dashboard.loading}</p>
       </div>
     );
   }
@@ -112,10 +62,12 @@ export default function FaqPage() {
 
         <main className={`flex-1 overflow-y-auto px-3 py-6 sm:px-4 md:px-6 lg:px-8 md:py-8 ${theme === "light" ? "bg-slate-100" : "bg-[#0a0a2a]"}`}>
           <div className="mx-auto w-full max-w-7xl">
-            <h2 className="mb-4 text-4xl font-semibold text-gray-900">FAQs</h2>
+            <h2 className="mb-4 text-4xl font-semibold text-gray-900">
+              {t.faq.pageTitle}
+            </h2>
 
             <div className="border border-teal-300">
-              {FAQ_ITEMS.map((item, index) => {
+              {t.faq.items.map((item, index) => {
                 const isOpen = openIndex === index;
 
                 return (

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import DashboardSidebar from "@/app/dashboard/_components/dashboard-sidebar";
 import DashboardHeader from "@/app/dashboard/_components/dashboard-header";
 import { useTheme } from "@/app/dashboard/_context/theme-context";
+import { useLanguage } from "@/app/dashboard/_context/language-context";
 import { getStoredUser, getStoredToken, clearAuth, getDisplayName } from "@/lib/auth-client";
 
 export default function ManageCroAccountPage() {
@@ -13,6 +14,7 @@ export default function ManageCroAccountPage() {
   const [user, setUser] = useState<ReturnType<typeof getStoredUser>>(null);
   const { theme } = useTheme();
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function ManageCroAccountPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0a0a2a]">
-        <p className="text-sm text-blue-200">Loading...</p>
+        <p className="text-sm text-blue-200">{t.dashboard.loading}</p>
       </div>
     );
   }
@@ -67,14 +69,14 @@ export default function ManageCroAccountPage() {
             <div className="mb-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-4 md:flex-row md:items-center">
               <div>
                 <h1 className="text-lg font-semibold text-gray-900">
-                  Company Information
+                  {t.manage.companyTitle}
                 </h1>
                 <p className="mt-1 text-sm text-gray-500">
-                  Review and update your personal and company information.
+                  {t.manage.companySubtitle}
                 </p>
               </div>
               <button className="rounded bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600">
-                Change Password
+                {t.manage.changePasswordButton}
               </button>
             </div>
 
@@ -84,17 +86,17 @@ export default function ManageCroAccountPage() {
             <div className="space-y-4 lg:col-span-1">
               <div>
                 <p className="text-sm font-semibold text-gray-800">
-                  Profile Image
+                  {t.manage.profileImageLabel}
                 </p>
               </div>
               <div className="flex flex-col items-center gap-4 rounded-lg border border-dashed border-gray-300 bg-gray-50 p-4">
                 <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-200 text-3xl">
-                  <span role="img" aria-label="profile">
+                  <span role="img" aria-label={t.manage.profileAriaLabel}>
                     👤
                   </span>
                 </div>
                 <label className="inline-flex cursor-pointer items-center justify-center rounded bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600">
-                  Upload
+                  {t.manage.uploadButtonLabel}
                   <input type="file" accept="image/*" className="hidden" />
                 </label>
               </div>
@@ -103,25 +105,25 @@ export default function ManageCroAccountPage() {
             {/* Personal info fields */}
             <div className="space-y-6 lg:col-span-3">
               <p className="text-sm font-semibold text-gray-800">
-                Personal Information
+                {t.manage.personalInfoLabel}
               </p>
 
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    First and Last Name
+                    {t.manage.firstLastNameLabel}
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                    placeholder="Full name"
+                    placeholder={t.manage.fullNamePlaceholder}
                     defaultValue={user.name ?? ""}
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    Date of Birth
+                    {t.manage.dobLabel}
                   </label>
                   <input
                     type="date"
@@ -131,73 +133,73 @@ export default function ManageCroAccountPage() {
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    Social Security Number
+                    {t.manage.ssnLabel}
                   </label>
                   <input
                     type="password"
                     className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                    placeholder="••••-••-••••"
+                    placeholder={t.manage.ssnPlaceholder}
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    Phone
+                    {t.manage.phoneLabel}
                   </label>
                   <input
                     type="tel"
                     className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                    placeholder="(000) 000-0000"
+                    placeholder={t.manage.phonePlaceholder}
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    Street Number and Name
+                    {t.manage.streetLabel}
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                    placeholder="Street address"
+                    placeholder={t.manage.streetPlaceholder}
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    City
+                    {t.manage.cityLabel}
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                    placeholder="City"
+                    placeholder={t.manage.cityPlaceholder}
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    State
+                    {t.manage.stateLabel}
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                    placeholder="State"
+                    placeholder={t.manage.statePlaceholder}
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    Zip
+                    {t.manage.zipLabel}
                   </label>
                   <input
                     type="text"
                     className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                    placeholder="ZIP code"
+                    placeholder={t.manage.zipPlaceholder}
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium uppercase text-gray-500">
-                    Email Address
+                    {t.manage.emailLabel}
                   </label>
                   <input
                     type="email"
@@ -212,48 +214,46 @@ export default function ManageCroAccountPage() {
           {/* Upload sections */}
           <div className="space-y-4">
             <p className="text-sm font-semibold text-gray-800">
-              Verification Documents
+              {t.manage.verificationDocumentsLabel}
             </p>
 
             <div className="grid gap-4 lg:grid-cols-3">
               <div className="space-y-2">
                 <p className="text-xs text-gray-600">
-                  Please upload document proof of{" "}
+                  {t.manage.photoIdPromptPrefix}{" "}
                   <span className="font-medium">
-                    photo identification
+                    {t.manage.photoIdentificationLabel}
                   </span>{" "}
-                  (Driver&apos;s License or State ID).
+                  {t.manage.photoIdPromptSuffix}
                 </p>
                 <label className="flex cursor-pointer items-center justify-between rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  <span>Upload File</span>
+                  <span>{t.manage.uploadFileLabel}</span>
                   <input type="file" className="hidden" />
                 </label>
               </div>
 
               <div className="space-y-2">
                 <p className="text-xs text-gray-600">
-                  Please upload proof of{" "}
+                  {t.manage.legalIdPromptPrefix}{" "}
                   <span className="font-medium">
-                    legal identification
+                    {t.manage.legalIdentificationLabel}
                   </span>{" "}
-                  or government proof of Social Security Number.
+                  {t.manage.legalIdPromptSuffix}
                 </p>
                 <label className="flex cursor-pointer items-center justify-between rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  <span>Upload File</span>
+                  <span>{t.manage.uploadFileLabel}</span>
                   <input type="file" className="hidden" />
                 </label>
               </div>
 
               <div className="space-y-2">
                 <p className="text-xs text-gray-600">
-                  Please upload document proof of{" "}
-                  <span className="font-medium">
-                    address
-                  </span>{" "}
-                  (recent utility bill, lease, or bank statement).
+                  {t.manage.addressPromptPrefix}{" "}
+                  <span className="font-medium">{t.manage.addressLabel}</span>{" "}
+                  {t.manage.addressPromptSuffix}
                 </p>
                 <label className="flex cursor-pointer items-center justify-between rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  <span>Upload File</span>
+                  <span>{t.manage.uploadFileLabel}</span>
                   <input type="file" className="hidden" />
                 </label>
               </div>
@@ -261,10 +261,10 @@ export default function ManageCroAccountPage() {
 
             <div className="space-y-1">
               <label className="text-xs font-medium uppercase text-gray-500">
-                Other Document Upload
+                {t.manage.otherDocumentUploadLabel}
               </label>
               <label className="flex cursor-pointer items-center justify-between rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                <span>Upload File</span>
+                <span>{t.manage.uploadFileLabel}</span>
                 <input type="file" className="hidden" />
               </label>
             </div>
@@ -275,7 +275,7 @@ export default function ManageCroAccountPage() {
               type="submit"
               className="inline-flex items-center rounded bg-emerald-500 px-6 py-2 text-sm font-semibold text-white hover:bg-emerald-600"
             >
-              Update Information
+              {t.manage.updateInformationButton}
             </button>
           </div>
         </form>
