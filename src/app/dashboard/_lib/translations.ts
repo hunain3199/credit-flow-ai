@@ -95,6 +95,14 @@ export const translations: Record<
       uploadReport: string;
       mobileAddedBy: string;
       mobileAllClients: string;
+      listLoadError: string;
+      listEmpty: string;
+      statusFilterLabel: string;
+      statusAll: string;
+      statusActive: string;
+      paginationPrev: string;
+      paginationNext: string;
+      pageIndicator: string;
     };
     clientsAdd: {
       pageTitle: string;
@@ -399,6 +407,14 @@ export const translations: Record<
       uploadReport: "Upload Report",
       mobileAddedBy: "Added by",
       mobileAllClients: "All Clients",
+      listLoadError: "Could not load clients.",
+      listEmpty: "No clients found.",
+      statusFilterLabel: "Status",
+      statusAll: "All",
+      statusActive: "Active",
+      paginationPrev: "Previous",
+      paginationNext: "Next",
+      pageIndicator: "Page {current} of {total}",
     },
     clientsAdd: {
       pageTitle: "Add New Client",
@@ -786,6 +802,14 @@ LATs [Content Box Level Attack Types]:
       uploadReport: "Subir informe",
       mobileAddedBy: "Agregado por",
       mobileAllClients: "Todos los clientes",
+      listLoadError: "No se pudieron cargar los clientes.",
+      listEmpty: "No se encontraron clientes.",
+      statusFilterLabel: "Estado",
+      statusAll: "Todos",
+      statusActive: "Activo",
+      paginationPrev: "Anterior",
+      paginationNext: "Siguiente",
+      pageIndicator: "Página {current} de {total}",
     },
     clientsAdd: {
       pageTitle: "Agregar nuevo cliente",
@@ -1173,6 +1197,14 @@ LATs [Tipos de ataque a nivel de contenido]:
       uploadReport: "Chaje rapò",
       mobileAddedBy: "Te ajoute pa",
       mobileAllClients: "Tout kliyan",
+      listLoadError: "Nou pa t kapab chaje kliyan yo.",
+      listEmpty: "Pa jwenn okenn kliyan.",
+      statusFilterLabel: "Estati",
+      statusAll: "Tout",
+      statusActive: "Aktif",
+      paginationPrev: "Anvan",
+      paginationNext: "Apre",
+      pageIndicator: "Paj {current} sou {total}",
     },
     clientsAdd: {
       pageTitle: "Ajoute nouvo kliyan",
