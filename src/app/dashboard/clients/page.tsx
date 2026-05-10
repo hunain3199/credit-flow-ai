@@ -94,9 +94,12 @@ export default function ManageClientsPage() {
                 <button className="rounded border border-emerald-500 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 hover:bg-emerald-100 sm:px-4 sm:py-2">
                   ⬇ {t.clients.exportCsv}
                 </button>
-                <button className="rounded bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-600 sm:px-4 sm:py-2">
+                <Link
+                  href="/dashboard/clients/add"
+                  className="inline-flex items-center justify-center rounded bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-600 sm:px-4 sm:py-2"
+                >
                   {t.clients.addNewClient}
-                </button>
+                </Link>
                 <button className="rounded bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-600 sm:px-4 sm:py-2">
                   {t.clients.importClient}
                 </button>

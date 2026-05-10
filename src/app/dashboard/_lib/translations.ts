@@ -96,6 +96,55 @@ export const translations: Record<
       mobileAddedBy: string;
       mobileAllClients: string;
     };
+    clientsAdd: {
+      pageTitle: string;
+      backToClients: string;
+      showHiddenFields: string;
+      showHiddenFieldsAria: string;
+      revealSensitiveAria: string;
+      concealSensitiveAria: string;
+      requiredMissing: string;
+      passwordMismatch: string;
+      submitting: string;
+      submitError: string;
+      sectionReport: string;
+      mfsnUsername: string;
+      mfsnPassword: string;
+      reportPartnerLabel: string;
+      optionEpicPro: string;
+      submitReport: string;
+      sectionPersonal: string;
+      firstName: string;
+      lastName: string;
+      dob: string;
+      monthPlaceholder: string;
+      dayPlaceholder: string;
+      yearPlaceholder: string;
+      ssn: string;
+      phone: string;
+      streetAddress: string;
+      city: string;
+      state: string;
+      selectState: string;
+      zipCode: string;
+      country: string;
+      email: string;
+      clientPortalUsername: string;
+      clientPortalPassword: string;
+      confirmPortalPassword: string;
+      aboutClientNotes: string;
+      aboutReportNotes: string;
+      manualCreditReportHtml: string;
+      uploadsHeading: string;
+      uploadDocumentsHere: string;
+      photoIdInstructions: string;
+      legalIdInstructions: string;
+      addressProofInstructions: string;
+      otherDocumentInstructions: string;
+      hiddenReportAccessToken: string;
+      hiddenSecondaryUploadLabel: string;
+      addClientSubmit: string;
+    };
     support: {
       pageTitle: string;
       searchPlaceholder: string;
@@ -203,8 +252,54 @@ export const translations: Record<
     };
     clientAccount: {
       editProfileTitle: string;
-      uploadDocumentsTitle: string;
-      uploadDocumentsHereLabel: string;
+      backToDashboard: string;
+      showHiddenFields: string;
+      hideHiddenFields: string;
+      showHiddenFieldsAria: string;
+      revealSensitiveAria: string;
+      concealSensitiveAria: string;
+      personalInformationHeading: string;
+      firstName: string;
+      lastName: string;
+      dateOfBirth: string;
+      monthPlaceholder: string;
+      dayPlaceholder: string;
+      yearPlaceholder: string;
+      socialSecurityNumber: string;
+      phone: string;
+      streetNumberAndName: string;
+      city: string;
+      state: string;
+      selectState: string;
+      zip: string;
+      country: string;
+      emailAddress: string;
+      clientPortalUsername: string;
+      clientPortalPassword: string;
+      confirmClientPortalPassword: string;
+      aboutClientNotes: string;
+      aboutReportNotes: string;
+      mfsnReportSectionHeading: string;
+      mfsnTableColSection: string;
+      mfsnTableColUsername: string;
+      mfsnTableColActions: string;
+      noMonitoringCompanyAdded: string;
+      addMonitoringRowAria: string;
+      uploadDocumentsHeading: string;
+      uploadDocPhotoId: string;
+      uploadDocLegalId: string;
+      uploadDocAddress: string;
+      otherDocumentUpload: string;
+      uploadSlotPlaceholder: string;
+      ariaUploadFile: string;
+      ariaDownload: string;
+      ariaRemove: string;
+      viewReportHeading: string;
+      tableColMonitoringCompany: string;
+      tableColCreditReportDate: string;
+      tableColReport: string;
+      tableColActions: string;
+      noReportAdded: string;
       saveButton: string;
     };
   }
@@ -304,6 +399,59 @@ export const translations: Record<
       uploadReport: "Upload Report",
       mobileAddedBy: "Added by",
       mobileAllClients: "All Clients",
+    },
+    clientsAdd: {
+      pageTitle: "Add New Client",
+      backToClients: "← Back to clients",
+      showHiddenFields: "Show hidden fields",
+      showHiddenFieldsAria: "Toggle showing optional and sensitive advanced fields",
+      revealSensitiveAria: "Show value",
+      concealSensitiveAria: "Hide value",
+      requiredMissing: "Please fill in all required fields.",
+      passwordMismatch: "Client portal passwords do not match.",
+      submitting: "Submitting…",
+      submitError: "Failed to add client. Please try again.",
+      sectionReport: "Report information",
+      mfsnUsername: "One-click MFSN username",
+      mfsnPassword: "One-click MFSN password",
+      reportPartnerLabel: "MyFreeScoreNow / report details",
+      optionEpicPro: "Epic Pro report (3P-AID)",
+      submitReport: "Submit report",
+      sectionPersonal: "Personal information",
+      firstName: "First name",
+      lastName: "Last name",
+      dob: "Date of birth",
+      monthPlaceholder: "MM",
+      dayPlaceholder: "DD",
+      yearPlaceholder: "YYYY",
+      ssn: "Social Security number",
+      phone: "Phone",
+      streetAddress: "Street address",
+      city: "City",
+      state: "State",
+      selectState: "Select state",
+      zipCode: "ZIP code",
+      country: "Country",
+      email: "Email",
+      clientPortalUsername: "Client portal username",
+      clientPortalPassword: "Client portal password",
+      confirmPortalPassword: "Confirm client portal password",
+      aboutClientNotes: "About client (notes)",
+      aboutReportNotes: "About report (notes)",
+      manualCreditReportHtml: "Manual credit report (HTML)",
+      uploadsHeading: "Upload documents",
+      uploadDocumentsHere: "Upload documents here",
+      photoIdInstructions:
+        "Photo ID: driver license + SSN card, or driver license + passport, or driver license + birth certificate — in color (black-and-white documents are not accepted).",
+      legalIdInstructions:
+        "Legal ID: same combinations as photo ID — in color (black-and-white documents are not accepted).",
+      addressProofInstructions:
+        "Proof of address: a bill mailed to your home address (not a shipping address) — in color (black-and-white documents are not accepted).",
+      otherDocumentInstructions:
+        "Other: screenshot or CSV from annualcreditreport.com, SmartCredit, PrivacyGuard, Credit Karma, etc., plus complete login details — in color (black-and-white documents are not accepted).",
+      hiddenReportAccessToken: "Report access token (optional)",
+      hiddenSecondaryUploadLabel: "Additional supporting document",
+      addClientSubmit: "Add client",
     },
     support: {
       pageTitle: "Tickets Management",
@@ -486,10 +634,60 @@ LATs [Content Box Level Attack Types]:
     },
     clientAccount: {
       editProfileTitle: "Edit Profile",
-      uploadDocumentsTitle:
-        "Upload Documents (allowed file types: .jpg, .png, .gif)",
-      uploadDocumentsHereLabel: "Upload Documents here",
-      saveButton: "Save",
+      backToDashboard: "← Back",
+      showHiddenFields: "Show Hidden Fields",
+      hideHiddenFields: "Hide Hidden Fields",
+      showHiddenFieldsAria: "Reveal or mask values in all sensitive fields (names, address, SSN, email, passwords, etc.)",
+      revealSensitiveAria: "Show value",
+      concealSensitiveAria: "Hide value",
+      personalInformationHeading: "Personal Information",
+      firstName: "First Name",
+      lastName: "Last Name",
+      dateOfBirth: "Date of Birth",
+      monthPlaceholder: "MM",
+      dayPlaceholder: "DD",
+      yearPlaceholder: "YYYY",
+      socialSecurityNumber: "Social Security Number",
+      phone: "Phone",
+      streetNumberAndName: "Street Number and Name",
+      city: "City",
+      state: "State",
+      selectState: "Select State",
+      zip: "Zip",
+      country: "Country",
+      emailAddress: "Email Address",
+      clientPortalUsername: "Client Portal Username",
+      clientPortalPassword: "Client Portal Password",
+      confirmClientPortalPassword: "Confirm Client Portal Password",
+      aboutClientNotes: "About Client Notes",
+      aboutReportNotes: "About REPORT NOTES",
+      mfsnReportSectionHeading: "MFSN Report Section",
+      mfsnTableColSection: "MFSN Report Section",
+      mfsnTableColUsername: "User Name",
+      mfsnTableColActions: "Action(s)",
+      noMonitoringCompanyAdded: "No Monitoring Company Added.",
+      addMonitoringRowAria: "Add monitoring company row",
+      uploadDocumentsHeading:
+        "Upload Documents here (Allowed file types .jpg .png .gif)",
+      uploadDocPhotoId:
+        "Please upload document Proof of PHOTO IDENTIFICATION (i.e Drivers License or State Identification Card)",
+      uploadDocLegalId:
+        "Please upload document Proof of legal Identification number(s) or document proof current legally acquired Social Security Number (i.e SSN CARD, first page of tax form, passport, green card, etc.)",
+      uploadDocAddress:
+        "Please upload document proof of address's street number, street name, City and State/Province/Etc. (such as a current Utility Bill or First page of a Banking statement",
+      otherDocumentUpload:
+        "Other Document Upload (Allowed file types .jpg .png .gif)",
+      uploadSlotPlaceholder: "Upload Documents here",
+      ariaUploadFile: "Choose file to upload",
+      ariaDownload: "Download",
+      ariaRemove: "Remove file",
+      viewReportHeading: "View Report",
+      tableColMonitoringCompany: "Monitoring Company",
+      tableColCreditReportDate: "Credit Report Date",
+      tableColReport: "Report",
+      tableColActions: "Action(s)",
+      noReportAdded: "No Report Added.",
+      saveButton: "SAVE",
     },
   },
   es: {
@@ -588,6 +786,59 @@ LATs [Content Box Level Attack Types]:
       uploadReport: "Subir informe",
       mobileAddedBy: "Agregado por",
       mobileAllClients: "Todos los clientes",
+    },
+    clientsAdd: {
+      pageTitle: "Agregar nuevo cliente",
+      backToClients: "← Volver a clientes",
+      showHiddenFields: "Mostrar campos ocultos",
+      showHiddenFieldsAria: "Activar campos opcionales y avanzados",
+      revealSensitiveAria: "Mostrar valor",
+      concealSensitiveAria: "Ocultar valor",
+      requiredMissing: "Por favor completa todos los campos obligatorios.",
+      passwordMismatch: "Las contraseñas del portal del cliente no coinciden.",
+      submitting: "Enviando…",
+      submitError: "No se pudo agregar el cliente. Inténtalo de nuevo.",
+      sectionReport: "Información del informe",
+      mfsnUsername: "Usuario MFSN de un clic",
+      mfsnPassword: "Contraseña MFSN de un clic",
+      reportPartnerLabel: "MyFreeScoreNow / detalles del informe",
+      optionEpicPro: "Informe Epic Pro (3P-AID)",
+      submitReport: "Enviar informe",
+      sectionPersonal: "Información personal",
+      firstName: "Nombre",
+      lastName: "Apellido",
+      dob: "Fecha de nacimiento",
+      monthPlaceholder: "MM",
+      dayPlaceholder: "DD",
+      yearPlaceholder: "AAAA",
+      ssn: "Número de Seguro Social",
+      phone: "Teléfono",
+      streetAddress: "Dirección",
+      city: "Ciudad",
+      state: "Estado",
+      selectState: "Seleccionar estado",
+      zipCode: "Código postal",
+      country: "País",
+      email: "Correo electrónico",
+      clientPortalUsername: "Usuario del portal del cliente",
+      clientPortalPassword: "Contraseña del portal del cliente",
+      confirmPortalPassword: "Confirmar contraseña del portal",
+      aboutClientNotes: "Notas sobre el cliente",
+      aboutReportNotes: "Notas sobre el informe",
+      manualCreditReportHtml: "Informe de crédito manual (HTML)",
+      uploadsHeading: "Subir documentos",
+      uploadDocumentsHere: "Subir documentos aquí",
+      photoIdInstructions:
+        "ID con foto: licencia + tarjeta del SSN, o licencia + pasaporte, o licencia + acta de nacimiento — a color (no se aceptan documentos en blanco y negro).",
+      legalIdInstructions:
+        "ID legal: mismas combinaciones que la foto — a color (no se aceptan documentos en blanco y negro).",
+      addressProofInstructions:
+        "Comprobante de domicilio: factura a su domicilio (no dirección de envío) — a color (no se aceptan documentos en blanco y negro).",
+      otherDocumentInstructions:
+        "Otro: captura o CSV de annualcreditreport.com, SmartCredit, PrivacyGuard, Credit Karma, etc., más datos de acceso completos — a color (no se aceptan documentos en blanco y negro).",
+      hiddenReportAccessToken: "Token de acceso al informe (opcional)",
+      hiddenSecondaryUploadLabel: "Documento de respaldo adicional",
+      addClientSubmit: "Agregar cliente",
     },
     support: {
       pageTitle: "Gestión de Tickets",
@@ -768,11 +1019,62 @@ LATs [Tipos de ataque a nivel de contenido]:
       profileAriaLabel: "perfil",
     },
     clientAccount: {
-      editProfileTitle: "Editar Perfil",
-      uploadDocumentsTitle:
-        "Subir Documentos (tipos de archivo permitidos: .jpg, .png, .gif)",
-      uploadDocumentsHereLabel: "Subir Documentos aquí",
-      saveButton: "Guardar",
+      editProfileTitle: "Editar perfil",
+      backToDashboard: "← Volver",
+      showHiddenFields: "Mostrar campos ocultos",
+      hideHiddenFields: "Ocultar campos ocultos",
+      showHiddenFieldsAria:
+        "Mostrar u ocultar los valores en todos los campos sensibles (nombres, dirección, SSN, correo, contraseñas, etc.)",
+      revealSensitiveAria: "Mostrar valor",
+      concealSensitiveAria: "Ocultar valor",
+      personalInformationHeading: "Información personal",
+      firstName: "Nombre",
+      lastName: "Apellido",
+      dateOfBirth: "Fecha de nacimiento",
+      monthPlaceholder: "MM",
+      dayPlaceholder: "DD",
+      yearPlaceholder: "AAAA",
+      socialSecurityNumber: "Número de Seguro Social",
+      phone: "Teléfono",
+      streetNumberAndName: "Número y nombre de calle",
+      city: "Ciudad",
+      state: "Estado",
+      selectState: "Seleccionar estado",
+      zip: "Código postal",
+      country: "País",
+      emailAddress: "Correo electrónico",
+      clientPortalUsername: "Usuario del portal del cliente",
+      clientPortalPassword: "Contraseña del portal del cliente",
+      confirmClientPortalPassword: "Confirmar contraseña del portal",
+      aboutClientNotes: "Notas sobre el cliente",
+      aboutReportNotes: "Notas sobre el INFORME",
+      mfsnReportSectionHeading: "Sección de informe MFSN",
+      mfsnTableColSection: "Sección de informe MFSN",
+      mfsnTableColUsername: "Nombre de usuario",
+      mfsnTableColActions: "Acción(es)",
+      noMonitoringCompanyAdded: "No se agregó empresa de monitoreo.",
+      addMonitoringRowAria: "Agregar fila de empresa de monitoreo",
+      uploadDocumentsHeading:
+        "Subir documentos aquí (tipos permitidos: .jpg .png .gif)",
+      uploadDocPhotoId:
+        "Suba el documento de prueba de IDENTIFICACIÓN CON FOTO (p. ej., licencia de conducir o identificación estatal)",
+      uploadDocLegalId:
+        "Suba el documento de prueba del número de identificación legal o del Número de Seguro Social (tarjeta SSN, primera página del formulario de impuestos, pasaporte, tarjeta verde, etc.)",
+      uploadDocAddress:
+        "Suba el documento de prueba del número de calle, nombre de calle, ciudad y estado/provincia (p. ej., factura de servicios o primera página de un estado de cuenta bancario)",
+      otherDocumentUpload:
+        "Otra carga de documento (tipos permitidos: .jpg .png .gif)",
+      uploadSlotPlaceholder: "Subir documentos aquí",
+      ariaUploadFile: "Elegir archivo para subir",
+      ariaDownload: "Descargar",
+      ariaRemove: "Quitar archivo",
+      viewReportHeading: "Ver informe",
+      tableColMonitoringCompany: "Empresa de monitoreo",
+      tableColCreditReportDate: "Fecha del informe de crédito",
+      tableColReport: "Informe",
+      tableColActions: "Acción(es)",
+      noReportAdded: "No se agregó informe.",
+      saveButton: "GUARDAR",
     },
   },
   cr: {
@@ -871,6 +1173,59 @@ LATs [Tipos de ataque a nivel de contenido]:
       uploadReport: "Chaje rapò",
       mobileAddedBy: "Te ajoute pa",
       mobileAllClients: "Tout kliyan",
+    },
+    clientsAdd: {
+      pageTitle: "Ajoute nouvo kliyan",
+      backToClients: "← Retounen nan kliyan yo",
+      showHiddenFields: "Montre jaden ki kache",
+      showHiddenFieldsAria: "Aktive jaden opsyonèl avanse yo",
+      revealSensitiveAria: "Montre valè a",
+      concealSensitiveAria: "Kache valè a",
+      requiredMissing: "Tanpri ranpli tout chan obligatwa yo.",
+      passwordMismatch: "Modpas pòtal kliyan yo pa menm.",
+      submitting: "Ap voye...",
+      submitError: "Nou pa t kapab ajoute kliyan an. Tanpri eseye ankò.",
+      sectionReport: "Enfòmasyon rapò",
+      mfsnUsername: "Itilizatè MFSN yon klik",
+      mfsnPassword: "Modpas MFSN yon klik",
+      reportPartnerLabel: "MyFreeScoreNow / detay rapò",
+      optionEpicPro: "Rapò Epic Pro (3P-AID)",
+      submitReport: "Voye rapò",
+      sectionPersonal: "Enfòmasyon pèsonèl",
+      firstName: "Prenon",
+      lastName: "Non fanmi",
+      dob: "Dat nesans",
+      monthPlaceholder: "MM",
+      dayPlaceholder: "JJ",
+      yearPlaceholder: "AAAA",
+      ssn: "Nimewo SSN",
+      phone: "Telefòn",
+      streetAddress: "Adrès",
+      city: "Vil",
+      state: "Eta",
+      selectState: "Chwazi eta",
+      zipCode: "Kòd postal",
+      country: "Peyi",
+      email: "Imèl",
+      clientPortalUsername: "Itilizatè pòtal kliyan",
+      clientPortalPassword: "Modpas pòtal kliyan",
+      confirmPortalPassword: "Konfime modpas pòtal la",
+      aboutClientNotes: "Nòt sou kliyan an",
+      aboutReportNotes: "Nòt sou rapò a",
+      manualCreditReportHtml: "Rapò kredi manyèl (HTML)",
+      uploadsHeading: "Chaje dokiman",
+      uploadDocumentsHere: "Chaje dokiman isit la",
+      photoIdInstructions:
+        "ID ak foto: lisans + kat SSN, oswa lisans + paspo, oswa lisans + sètifika nesans — an koulè (pa aksepte dokiman nwa ak blan).",
+      legalIdInstructions:
+        "ID legal: menm konbinezon ak foto ID — an koulè (pa aksepte dokiman nwa ak blan).",
+      addressProofInstructions:
+        "Prèv adrès: yon bòdwo nan adrès kay ou (pa adrès ekspedisyon) — an koulè (pa aksepte dokiman nwa ak blan).",
+      otherDocumentInstructions:
+        "Lòt: kapti ekran oswa CSV annualcreditreport.com, SmartCredit, PrivacyGuard, Credit Karma, elatriye, ansanm ak tout detay koneksyon — an koulè (pa aksepte dokiman nwa ak blan).",
+      hiddenReportAccessToken: "Tokn aksè rapò (opsyonèl)",
+      hiddenSecondaryUploadLabel: "Dokiman sipò adisyonèl",
+      addClientSubmit: "Ajoute kliyan",
     },
     support: {
       pageTitle: "Jesyon Tikè",
@@ -1050,11 +1405,62 @@ LATs [Kalite atak nan nivo bwat kontni]:
       profileAriaLabel: "pwofil",
     },
     clientAccount: {
-      editProfileTitle: "Edit Profil",
-      uploadDocumentsTitle:
-        "Telechaje Dokiman (tip fichye ki pèmèt: .jpg, .png, .gif)",
-      uploadDocumentsHereLabel: "Telechaje Dokiman isit la",
-      saveButton: "Sove",
+      editProfileTitle: "Modifye pwofil",
+      backToDashboard: "← Retounen",
+      showHiddenFields: "Montre jaden kache yo",
+      hideHiddenFields: "Kache jaden kache yo",
+      showHiddenFieldsAria:
+        "Montre oswa kache valè nan tout jaden sansib yo (non, adrès, SSN, imèl, modpas, elatriye)",
+      revealSensitiveAria: "Montre valè a",
+      concealSensitiveAria: "Kache valè a",
+      personalInformationHeading: "Enfòmasyon pèsonèl",
+      firstName: "Prenon",
+      lastName: "Non fanmi",
+      dateOfBirth: "Dat nesans",
+      monthPlaceholder: "MM",
+      dayPlaceholder: "JJ",
+      yearPlaceholder: "AAAA",
+      socialSecurityNumber: "Nimewo SSN",
+      phone: "Telefòn",
+      streetNumberAndName: "Nimewo ak non lari a",
+      city: "Vil",
+      state: "Eta",
+      selectState: "Chwazi eta",
+      zip: "Kòd postal",
+      country: "Peyi",
+      emailAddress: "Imèl",
+      clientPortalUsername: "Itilizatè pòtal kliyan",
+      clientPortalPassword: "Modpas pòtal kliyan",
+      confirmClientPortalPassword: "Konfime modpas pòtal la",
+      aboutClientNotes: "Nòt sou kliyan an",
+      aboutReportNotes: "Nòt sou RAPÒ a",
+      mfsnReportSectionHeading: "Seksyon rapò MFSN",
+      mfsnTableColSection: "Seksyon rapò MFSN",
+      mfsnTableColUsername: "Non itilizatè",
+      mfsnTableColActions: "Aksyon",
+      noMonitoringCompanyAdded: "Pa gen konpayi siveyans ki ajoute.",
+      addMonitoringRowAria: "Ajoute liy konpayi siveyans",
+      uploadDocumentsHeading:
+        "Telechaje dokiman isit la (tip fichye otorize .jpg .png .gif)",
+      uploadDocPhotoId:
+        "Tanpri telechaje dokiman PRÈV IDANTITE AK FOTO (egzanp lisans kondwi oswa kat idantifikasyon eta)",
+      uploadDocLegalId:
+        "Tanpri telechaje dokiman prèv nimewo idantifikasyon legal oswa prèv Nimewo Sekirite Sosyal (kat SSN, premye paj fòm taks, paspo, kat vèt, elatriye)",
+      uploadDocAddress:
+        "Tanpri telechaje dokiman prèv nimewo lari, non lari, vil ak eta/provins (egzanp yon bòdwo sèvis kouran oswa premye paj yon deklarasyon bank)",
+      otherDocumentUpload:
+        "Lòt telechajman dokiman (tip fichye otorize .jpg .png .gif)",
+      uploadSlotPlaceholder: "Telechaje dokiman isit la",
+      ariaUploadFile: "Chwazi fichye pou telechaje",
+      ariaDownload: "Telechaje",
+      ariaRemove: "Retire fichye a",
+      viewReportHeading: "Gade rapò",
+      tableColMonitoringCompany: "Konpayi siveyans",
+      tableColCreditReportDate: "Dat rapò kredi",
+      tableColReport: "Rapò",
+      tableColActions: "Aksyon",
+      noReportAdded: "Pa gen rapò ki ajoute.",
+      saveButton: "SOVE",
     },
   },
 };

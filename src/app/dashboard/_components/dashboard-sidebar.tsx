@@ -20,6 +20,13 @@ export default function DashboardSidebar({
   const { theme } = useTheme();
   const isLight = theme === "light";
 
+  function isNavActive(href: string) {
+    if (href === "/dashboard/clients") {
+      return currentPath === href || currentPath.startsWith("/dashboard/clients/");
+    }
+    return currentPath === href;
+  }
+
   const itemClass = (isActive: boolean) =>
     isActive
       ? isLight
@@ -84,7 +91,7 @@ export default function DashboardSidebar({
           <div className="mb-4">
             <p className={`text-xs font-semibold uppercase ${isLight ? "text-slate-500" : "text-blue-300"}`}>{t.sidebar.main}</p>
             {mainItems.map((item) => (
-              <Link key={item.href} href={item.href} className={itemClass(currentPath === item.href)}>
+              <Link key={item.href} href={item.href} className={itemClass(isNavActive(item.href))}>
                 {item.label}
               </Link>
             ))}
